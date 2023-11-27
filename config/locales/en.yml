@@ -43,3 +43,13 @@ en:
     show:
       header: "Question"
       answers: "Answers"
+      add_answer: "Add answer"
+    new:
+      ask: "Ask"
+    create:
+      success: "Your question successfully created."
+
+  answers:
+    create:
+      success: "Answer created"
+      submit: "Create answer"

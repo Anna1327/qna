@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
+  before_action :authenticate_user!, only: :create
 
   def new
   end
@@ -8,7 +9,7 @@ class AnswersController < ApplicationController
   def create
     @answer = question.answers.new(answer_params)
     if @answer.save
-      redirect_to question
+      redirect_to question, notice: t('answers.create.success')
     else
       render :new
     end
