@@ -1,2 +1,8 @@
-h1= question.title
+h3= t('.header')
+
+p= question.title
 p= question.body
+
+h4= t('.answers')
+ul
+  =render question.answers

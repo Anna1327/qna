@@ -40,3 +40,6 @@ en:
       ask_question: "Ask question"
       title: "Title"
       body: "Body"
+    show:
+      header: "Question"
+      answers: "Answers"
