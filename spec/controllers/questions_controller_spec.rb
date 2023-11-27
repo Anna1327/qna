@@ -3,12 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  let(:question) { create(:question) }
   let(:user) { create(:user) }
-
+  let(:question) { create :question, author: user }
 
   describe "GET #index" do
-    let(:questions) { create_list(:question, 3) }
+    let(:questions) { create_list :question, 3, author: user }
 
     before { get :index }
 
@@ -103,7 +102,12 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     context "with invalid attributes" do
-      before { patch :update, params: { id: question, question: attributes_for(:question, :invalid) } }
+      before do 
+        patch :update, params: { 
+          id: question, 
+          question: attributes_for(:question, :invalid) 
+        }
+      end
 
       it "do not change the question" do
         question.reload
@@ -120,7 +124,7 @@ RSpec.describe QuestionsController, type: :controller do
   describe "DELETE #destroy" do
     before { login(user) }
 
-    let!(:question) { create(:question) }
+    let!(:question) { create :question, author: user }
 
     it "deletes the question" do
       expect { delete :destroy, params: { id: question } }.to change(Question, :count).by(-1)

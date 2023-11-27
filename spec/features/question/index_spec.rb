@@ -9,7 +9,7 @@ feature 'User view a list of questions', %q{
 } do
 
   given(:user) { create(:user) }
-  given!(:question) { create(:question) }
+  given!(:question) { create :question, author: user }
 
   describe "Authenticated user" do
     background do 
@@ -18,8 +18,8 @@ feature 'User view a list of questions', %q{
     end
 
     scenario "can see a list of all questions" do
-      expect(page).to have_content "#{question.title}"
-      expect(page).to have_content "#{question.body}"
+      expect(page).to have_content(question.title)
+      expect(page).to have_content(question.body)
     end
   end
 
@@ -29,8 +29,8 @@ feature 'User view a list of questions', %q{
     end
 
     scenario "can see a list of all questions" do
-      expect(page).to have_content "#{question.title}"
-      expect(page).to have_content "#{question.body}"
+      expect(page).to have_content(question.title)
+      expect(page).to have_content(question.body)
     end
   end
 end

@@ -8,6 +8,7 @@ class AnswersController < ApplicationController
 
   def create
     @answer = question.answers.new(answer_params)
+    @answer.author = current_user
     if @answer.save
       redirect_to question, notice: t('answers.create.success')
     else
@@ -15,7 +16,22 @@ class AnswersController < ApplicationController
     end
   end
 
+  def destroy
+    question = answer.question
+    if current_user.author_of?(question)
+      answer.destroy
+      flash[:notice] = t('.success')
+    else
+      flash[:notice] = t('.destroy.error.other')
+    end
+    redirect_to question
+  end
+
   private
+
+  def answer
+    @answer ||= Answer.find(params[:id])
+  end
 
   def question
     @question ||= Question.find(params[:question_id])

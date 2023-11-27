@@ -3,14 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
-  let(:question) { create :question }
   let(:user) { create :user }
+  let(:question) { create :question, author: user }
 
   describe "POST #create" do
     before { login(user) }
 
     context "with valid attributes" do
-      it "saves a new answer in the database" do
+      it "when saves a new answer in the database" do
         expect do
           post :create, params: { 
             question_id: question, 
@@ -30,7 +30,7 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context "with invalid attributes" do
-      it "do not save a new answer" do
+      it "when do not save a new answer" do
         expect do
           post :create, params: { 
             question_id: question, 
@@ -49,18 +49,39 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 
-  # describe "DELETE #destroy" do
-  #   before { login(user) }
+  describe "DELETE #destroy" do
+    before { login(user) }
 
-  #   let(:answer) { create(:answer) }
+    context "when user is answer's author" do
+      let!(:answer) { create :answer, question: question, author: user }
 
-  #   it "user can to delete own the answer" do
-  #   end
+      it "deletes the answer" do
+        expect do 
+          delete :destroy, params: { id: answer }
+        end.to change(question.answers, :count).by(-1)
+      end
 
-  #   it "user can't to delete someone else's answer" do
-  #   end
+      it "redirects to question" do
+        delete :destroy, params: { id: answer }
+        expect(response).to redirect_to question_path(question)
+      end
+    end
 
-  #   it "redirects to question" do
-  #   end
-  # end
+    context "when user is not answer's author" do
+      let(:other_user) { create :user }
+      let(:other_question) { create :question, author: other_user }
+      let!(:other_answer) { create :answer, question: other_question, author: other_user }
+
+      it "does not delete the answer" do
+        expect do
+          delete :destroy, params: { id: other_answer }
+        end.not_to change(other_question.answers, :count)
+      end
+
+      it "redirects to question" do
+        delete :destroy, params: { id: other_answer }
+        expect(response).to redirect_to question_path(other_question)
+      end
+    end
+  end
 end
