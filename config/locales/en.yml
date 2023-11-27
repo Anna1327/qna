@@ -33,3 +33,10 @@ en:
   main:
     sign_in: "Sign in"
     sign_out: "Sign out"
+
+  questions:
+    index:
+      header: "Questions"
+      ask_question: "Ask question"
+      title: "Title"
+      body: "Body"
