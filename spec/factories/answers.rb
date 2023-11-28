@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :answer do
-    body { "MyText" }
+    body { "Body of the answer" }
     correct { false }
     question { nil }
 

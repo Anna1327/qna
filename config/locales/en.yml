@@ -30,4 +30,41 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  main:
+    sign_in: "Sign in"
+    sign_out: "Sign out"
+
+  shared:
+    errors:
+      header:
+        one: "%{count} error found"
+        other: "%{count} errors found"
+
+  questions:
+    index:
+      header: "Questions"
+      ask_question: "Ask question"
+      title: "Title"
+      body: "Body"
+    show:
+      header: "Question"
+      answers: "Answers"
+      add_answer: "Add answer"
+      delete: "Delete question"
+      delete_answer: "Delete answer"
+    new:
+      ask: "Ask"
+    create:
+      success: "Your question successfully created."
+    destroy:
+      errors:
+        other: "You can not delete other's question."
+
+  answers:
+    create:
+      success: "Answer created"
+      submit: "Create answer"
+    destroy:
+      success: "Your answer was successfully delete"
+      error:
+        other: "You can not delete other's answer."

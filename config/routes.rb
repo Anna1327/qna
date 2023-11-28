@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
-  resources :questions
-    resources :answers, only: :create
+  devise_for :users
+  resources :questions, shallow: true do
+    resources :answers, only: %i[create destroy]
+  end
+  
+  root to: 'questions#index'
 end

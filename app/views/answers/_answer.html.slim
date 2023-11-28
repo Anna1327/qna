@@ -1,0 +1,6 @@
+- if answer.persisted?
+  = render 'shared/errors', resource: answer
+  li
+    p= answer.body
+    - if current_user&.author_of?(answer)
+      p= link_to t('questions.show.delete_answer'), answer_path(answer), method: :delete
