@@ -7,14 +7,16 @@ p= question.body
   p= link_to t('.delete'), question_path(question), method: :delete, confirm: 'Delete?'
 
 h4= t('.answers')
-ul.answers
+.answers
   =render question.answers
 
 h4= t('.add_answer')
 
 .answer_errors
   = render 'shared/errors', resource: @answer
-= form_with model: [question, @answer], local: true do |f|
-  = f.label :body
-  = f.text_area :body
-  = f.submit t('answers.create.submit')
+
+= form_with model: [question, @answer], local: false do |f|
+  p
+    = f.label :body
+    = f.text_area :body
+  p= f.submit t('answers.create.submit')
