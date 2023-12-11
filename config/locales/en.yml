@@ -51,12 +51,15 @@ en:
       answers: "Answers"
       add_answer: "Add answer"
       delete: "Delete question"
+      edit: "Edit question"
       delete_answer: "Delete answer"
       edit_answer: "Edit answer"
     new:
       ask: "Ask"
     create:
       success: "Your question successfully created."
+    edit:
+      update: "Save"
     destroy:
       errors:
         other: "You can not delete other's question."
@@ -67,7 +70,9 @@ en:
       submit: "Create answer"
     edit:
       update: "Save"
+      errors:
+        other: "You can not edit other's answer"
     destroy:
       success: "Your answer was successfully delete"
       error:
-        other: "You can not delete other's answer."
+        other: "You can not delete other's answer"
