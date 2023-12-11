@@ -6,5 +6,5 @@ document
   document
       .querySelector('.answers')
       .insertAdjacentHTML('beforeend', '<%= j render @answer %>')
-  document.getElementById('answer_body').value = ''
+  document.querySelector('.new-answer #answer_body').value = ''
 <% end %>

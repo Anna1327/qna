@@ -49,6 +49,67 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 
+  describe 'PATCH #update' do
+    before { login(user) }
+
+    let!(:answer) { create :answer, question: question, author: user }
+
+    context 'with valid attributes' do
+      it 'changes answer attributes' do
+        patch :update,
+              params: { id: answer, answer: { body: 'New body' } },
+              format: :js
+        answer.reload
+        expect(answer.body).to eq'New body'
+      end
+
+      it 'renders update template' do
+        patch :update,
+              params: { id: answer, answer: { body: 'New body' } },
+              format: :js
+        expect(response).to render_template :update
+      end
+    end
+
+    context 'with invalid attributes' do
+      it 'does not change answer attributes' do
+        expect do
+          patch :update,
+                params: { id: answer, answer: attributes_for(:answer, :invalid) },
+                format: :js
+        end.to_not change(answer, :body)
+      end
+
+      it 'renders update template' do
+        patch :update,
+              params: { id: answer, answer: { body: 'New body' } },
+              format: :js
+        expect(response).to render_template :update
+      end
+    end
+
+    context "other's answer" do
+      let(:other_user) { create :user }
+      let(:other_question) { create :question, author: other_user }
+      let!(:other_answer) { create :answer, question: other_question, author: other_user }
+
+      it 'does not change answer attributes' do
+        expect do
+          patch :update,
+                params: { id: other_answer, answer: { body: 'Updated body' } },
+                format: :js
+        end.to_not change(other_answer, :body)
+      end
+      it 'redirects to question' do
+        patch :update,
+              params: { id: other_answer, answer: { body: 'Updated body' } },
+              format: :js
+
+        expect(response.status).to render_template :update
+      end
+    end
+  end
+
   describe "DELETE #destroy" do
     before { login(user) }
 

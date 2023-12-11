@@ -1,6 +1,14 @@
 - if answer.persisted?
-  = render 'shared/errors', resource: answer
-  li
-    p= answer.body
+  div class="answer_errors_#{answer.id}"
+    = render 'shared/errors', resource: answer
+  li id="answer-#{answer.id}"
+    p= "#{answer.body}"
     - if current_user&.author_of?(answer)
       p= link_to t('questions.show.delete_answer'), answer_path(answer), method: :delete
+
+      p= link_to t('questions.show.edit_answer'), "#", class: 'edit-answer-link', data: { answer_id: answer.id }
+    
+    = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
+      = f.label :body, 'Edit answer'
+      = f.text_area :body
+      p= f.submit t('answers.edit.update')

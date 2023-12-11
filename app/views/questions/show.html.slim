@@ -15,7 +15,7 @@ h4= t('.add_answer')
 .answer_errors
   = render 'shared/errors', resource: @answer
 
-= form_with model: [question, @answer], local: false do |f|
+= form_with model: [question, @answer], local: false, class: 'new-answer' do |f|
   p
     = f.label :body
     = f.text_area :body

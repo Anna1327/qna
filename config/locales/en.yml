@@ -52,6 +52,7 @@ en:
       add_answer: "Add answer"
       delete: "Delete question"
       delete_answer: "Delete answer"
+      edit_answer: "Edit answer"
     new:
       ask: "Ask"
     create:
@@ -64,6 +65,8 @@ en:
     create:
       success: "Answer created"
       submit: "Create answer"
+    edit:
+      update: "Save"
     destroy:
       success: "Your answer was successfully delete"
       error:

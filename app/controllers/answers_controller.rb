@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: :create
+  before_action :authenticate_user!, only: [:create, :update]
 
   def new
   end
@@ -12,9 +12,13 @@ class AnswersController < ApplicationController
     @answer.save
   end
 
+  def update
+    answer.update(answer_params) if current_user.author_of?(answer)
+  end
+
   def destroy
     question = answer.question
-    if current_user.author_of?(question)
+    if current_user.author_of?(answer)
       answer.destroy
       flash[:notice] = t('.success')
     else
