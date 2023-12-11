@@ -4,7 +4,7 @@
   li id="answer-#{answer.id}"
     p= "#{answer.body}"
     - if current_user&.author_of?(answer)
-      p= link_to t('questions.show.delete_answer'), answer_path(answer), method: :delete
+      p= link_to t('questions.show.delete_answer'), answer_path(answer), method: :delete, remote: true
 
       p= link_to t('questions.show.edit_answer'), "#", class: 'edit-answer-link', data: { answer_id: answer.id }
     

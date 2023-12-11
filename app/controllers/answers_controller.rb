@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   def new
   end
@@ -17,14 +17,12 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    question = answer.question
     if current_user.author_of?(answer)
       answer.destroy
       flash[:notice] = t('.success')
     else
       flash[:notice] = t('.destroy.error.other')
     end
-    redirect_to question
   end
 
   private
