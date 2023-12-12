@@ -76,3 +76,5 @@ en:
       success: "Your answer was successfully delete"
       error:
         other: "You can not delete other's answer"
+    mark_as_the_best:
+      submit: "Mark as the best"

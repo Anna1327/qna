@@ -1,14 +1,18 @@
 - if answer.persisted?
   div class="answer_errors_#{answer.id}"
     = render 'shared/errors', resource: answer
-  li id="answer-#{answer.id}"
+  li id="answer-#{answer.id}" class=answer_class
     p= "#{answer.body}"
+    - if current_user&.author_of?(answer.question)
+      p= link_to t('answers.mark_as_the_best.submit'),
+              mark_as_the_best_answer_path(answer.question, best_answer: answer.id),
+              method: :patch,
+              remote: true,
+              class: 'best-answer-link',
+              data: { best_answer: answer.id }
     - if current_user&.author_of?(answer)
       p= link_to t('questions.show.delete_answer'), answer_path(answer), method: :delete, remote: true
 
       p= link_to t('questions.show.edit_answer'), "#", class: 'edit-answer-link', data: { answer_id: answer.id }
     
-    = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
-      = f.label :body, 'Edit answer'
-      = f.text_area :body
-      p= f.submit t('answers.edit.update')
+    = render 'answers/form', answer: answer

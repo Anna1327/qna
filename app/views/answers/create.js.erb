@@ -5,6 +5,6 @@ document
 <% if @answer.persisted? %>
   document
       .querySelector('.answers')
-      .insertAdjacentHTML('beforeend', '<%= j render @answer %>')
+      .insertAdjacentHTML('beforeend', '<%= j render @answer, answer_class: @answer.best? ? 'best_answer' : nil %>')
   document.querySelector('.new-answer #answer_body').value = ''
 <% end %>

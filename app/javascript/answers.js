@@ -4,8 +4,8 @@ document.addEventListener("turbolinks:load", () => {
     answers.addEventListener("click", (event) => {
       if (event.target.classList.contains("edit-answer-link")) {
         event.preventDefault();
-        event.target.classList.add("hidden");
         const answerId = event.target.dataset.answerId;
+        event.target.classList.add("hidden");
         document
           .querySelector(`form#edit-answer-${answerId}`)
           .classList.toggle("hidden");

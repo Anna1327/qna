@@ -9,8 +9,8 @@ feature 'User can create answer', %q{
 } do
 
   given(:user) { create(:user) }
-  given!(:question) { create :question, author: user }
-  given!(:answer) { create_list :answer, 3, question: question, author: user }
+  given(:question) { create :question, author: user }
+  given(:answers) { create_list :answer, 3, question: question, author: user }
 
   describe 'Authenticated user', js: true do
     background do 
@@ -19,7 +19,7 @@ feature 'User can create answer', %q{
     end
 
     scenario "can create an answer to the question" do
-      fill_in 'Body', with: 'Answer body'
+      fill_in 'answer_body', with: 'Answer body'
       click_on I18n.t('answers.create.submit')
       
       expect(page).to have_content I18n.t('questions.show.answers')
@@ -37,12 +37,10 @@ feature 'User can create answer', %q{
   describe 'Unauthenticated user' do
     background do 
       visit question_path(question)
-      fill_in 'Body', with: 'Answer body'
-      click_on I18n.t('answers.create.submit')
     end
 
     scenario "tries to create an answer to the question" do
-      expect(page).to have_content I18n.t('devise.failure.unauthenticated')
+      expect(page).not_to have_content I18n.t('answers.create.submit')
     end
   end
 end

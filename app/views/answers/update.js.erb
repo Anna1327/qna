@@ -6,5 +6,5 @@ document
   document.querySelector('<%= "form#edit-answer-#{@answer.id}" %>').innerHTML = ''
   document
     .querySelector(".answers li#answer-<%= @answer.id %>")
-    .innerHTML = '<%= j render @answer %>'
+    .innerHTML = '<%= j render @answer, answer_class: @answer.best? ? 'best_answer' : nil %>';
 <% end %>

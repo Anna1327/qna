@@ -9,19 +9,19 @@ feature 'User can edit his answer', %q{
 } do
 
   given(:user) { create(:user) }
-  given!(:question) { create :question, author: user }
+  given(:question) { create :question, author: user }
   given!(:answer) { create :answer, question: question, author: user }
 
-  describe "Authenticated user", js: true do
-    background do 
+  describe "Authenticated user" do
+    background do
       sign_in(user)
       visit question_path(question)
     end
 
-    scenario "edits his answer" do
+    scenario "edits his answer", js: true do
       click_on I18n.t('questions.show.edit_answer')
 
-      within '.answers' do
+      within ".answers form#edit-answer-#{answer.id}" do
         fill_in 'Body', with: 'Updated answer'
         click_button I18n.t('answers.edit.update')
 
@@ -31,9 +31,10 @@ feature 'User can edit his answer', %q{
       end
     end
 
-    scenario "edits his answer with errors" do
+    scenario "edits his answer with errors", js: true do
       click_on I18n.t('questions.show.edit_answer')
-      within '.answers' do
+
+      within ".answers form#edit-answer-#{answer.id}" do
         fill_in 'Body', with: ""
         click_button I18n.t('answers.edit.update')
         expect(page).to have_content "Body can't be blank"
@@ -48,7 +49,7 @@ feature 'User can edit his answer', %q{
       sign_in(other_user)
       visit question_path(question)
 
-      expect(page).not_to have_link 'Edit'
+      expect(page).not_to have_link I18n.t('questions.show.edit_answer')
     end
   end
 
@@ -56,7 +57,7 @@ feature 'User can edit his answer', %q{
     scenario "can not edit answer" do
       visit questions_path
 
-      expect(page).not_to have_link 'Edit'
+      expect(page).not_to have_link I18n.t('questions.show.edit_answer')
     end
   end
 end

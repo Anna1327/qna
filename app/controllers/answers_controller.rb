@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy, :mark_as_the_best]
 
   def new
   end
@@ -23,6 +23,12 @@ class AnswersController < ApplicationController
     else
       flash[:notice] = t('.destroy.error.other')
     end
+  end
+
+  def mark_as_the_best
+    @answer = Answer.find(params[:best_answer])
+    @question = Question.find(params[:id])
+    @answer.set_best_answer(@question) if current_user.author_of?(@question)
   end
 
   private
