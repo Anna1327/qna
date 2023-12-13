@@ -1,0 +1,9 @@
+document
+    .querySelector('.answer_errors')
+    .innerHTML = '<%= render 'shared/errors', resource: @answer %>'
+
+<% unless @answer.errors.present? %>
+const answer = document.querySelector(".answers li#answer-<%= @answer.id %>");
+answer.parentNode.removeChild(answer);
+document.querySelector('body p.notice').innerText = '<%= flash[:notice] %>'
+<% end %>

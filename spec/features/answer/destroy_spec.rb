@@ -12,7 +12,7 @@ feature 'User can destroy answer', %q{
   given(:question) { create :question, author: user }
   given(:answer) { create_list :answer, 3, question: question, author: user }
 
-  describe 'Authenticated user' do
+  describe 'Authenticated user', js: true do
     background do 
       sign_in(user)
     end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: :create
+  before_action :authenticate_user!, only: [:create, :update, :destroy, :mark_as_the_best]
 
   def new
   end
@@ -9,22 +9,26 @@ class AnswersController < ApplicationController
   def create
     @answer = question.answers.new(answer_params)
     @answer.author = current_user
-    if @answer.save
-      redirect_to question, notice: t('answers.create.success')
-    else
-      render :new
-    end
+    @answer.save
+  end
+
+  def update
+    answer.update(answer_params) if current_user.author_of?(answer)
   end
 
   def destroy
-    question = answer.question
-    if current_user.author_of?(question)
+    if current_user.author_of?(answer)
       answer.destroy
       flash[:notice] = t('.success')
     else
       flash[:notice] = t('.destroy.error.other')
     end
-    redirect_to question
+  end
+
+  def mark_as_the_best
+    @answer = Answer.find(params[:best_answer])
+    @question = Question.find(params[:id])
+    @answer.set_best_answer(@question) if current_user.author_of?(@question)
   end
 
   private

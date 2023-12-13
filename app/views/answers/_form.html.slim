@@ -1,0 +1,9 @@
+= form_with model: answer,
+        url: answer_path(answer),
+        local: false,
+        html: { id: "edit-answer-#{answer.id}",
+                class: 'hidden' } do |f|
+  p
+    = f.label :body
+    = f.text_area :body
+  p= f.submit t('answers.edit.update')

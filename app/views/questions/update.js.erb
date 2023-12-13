@@ -1,0 +1,10 @@
+document
+    .querySelector('.question_errors')
+    .innerHTML = '<%= render 'shared/errors', resource: @question %>'
+
+<% unless @question.errors.present? %>
+document.getElementById('question_title').innerText = '<%= @question.title %>';
+document.getElementById('question_body').innerText = '<%= @question.body %>';
+document.querySelector('.question form').classList.toggle('hidden')
+document.querySelector('.question .edit-question-link').classList.toggle('hidden')
+<% end %>

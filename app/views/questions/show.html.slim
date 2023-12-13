@@ -1,19 +1,38 @@
 h3= t('.header')
 
-p= question.title
-p= question.body
+.question
+  p#question_title= @question.title
+  p#question_body= @question.body
 
-- if user_signed_in? && current_user.author_of?(question)
-  p= link_to t('.delete'), question_path(question), method: :delete, confirm: 'Delete?'
+  - if user_signed_in? && current_user.author_of?(question)
+    p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'
+    p= link_to t('.edit'), '#', data: { question_id: @question.id }, class: 'edit-question-link'
+
+  .question_errors
+    = render 'shared/errors', resource: @question
+  
+  = form_with model: @question, local: false, class: 'hidden' do |f|
+    p
+      = f.label :title
+      = f.text_field :title
+    p
+      = f.label :body
+      = f.text_area :body
+    p= f.submit t('questions.edit.update')
 
 h4= t('.answers')
-ul
-  =render question.answers
 
-h4= t('.add_answer')
-= form_with model: [question, @answer],
-        url: question_answers_path(question),
-        local: true do |f|
-  = f.label :body
-  = f.text_area :body
-  = f.submit t('answers.create.submit')
+.answers
+  =render question.best_answer, answer_class: 'best_answer' unless question.best_answer_id.nil?
+  =render question.other_answers, answer_class: nil
+
+  - if user_signed_in?
+    h4= t('.add_answer')
+    .answer_errors
+      = render 'shared/errors', resource: @answer
+
+    = form_with model: [question, @answer], local: false, class: 'new-answer' do |f|
+      p
+        = f.label :body
+        = f.text_area :body
+      p= f.submit t('answers.create.submit')

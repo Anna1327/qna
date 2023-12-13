@@ -1,0 +1,10 @@
+document
+    .querySelector(`.answer_errors_${<%= @answer.id %>}`)
+    .innerHTML = '<%= render 'shared/errors', resource: @answer %>'
+
+<% unless @answer.errors.present? %>
+  document.querySelector('<%= "form#edit-answer-#{@answer.id}" %>').innerHTML = ''
+  document
+    .querySelector(".answers li#answer-<%= @answer.id %>")
+    .innerHTML = '<%= j render @answer, answer_class: @answer.best? ? 'best_answer' : nil %>';
+<% end %>

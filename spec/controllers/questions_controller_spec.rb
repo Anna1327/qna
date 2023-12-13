@@ -23,6 +23,14 @@ RSpec.describe QuestionsController, type: :controller do
   describe "GET #show" do
     before { get :show, params: { id: question.id } }
 
+    it "assigns the requested question to @question" do
+      expect(assigns(:question)).to eq question
+    end
+
+    it "assigns the answer for question" do
+      expect(assigns(:answer)).to be_a_new(Answer)
+    end
+
     it "renders show view" do
       expect(response).to render_template :show
     end
@@ -79,24 +87,24 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
-  describe "PATCH #update" do
+  describe "PATCH #update", js: true do
     before { login(user) }
 
     context "with valid attributes" do
       it "assigns the requested question to @question" do
-        patch :update, params: { id: question, question: attributes_for(:question) }
+        patch :update, params: { id: question, question: attributes_for(:question) }, format: :js
         expect(assigns(:question)).to eq(question)
       end
 
       it "change question attributes" do
-        patch :update, params: { id: question, question: { title: "new title", body: "new body" } }
+        patch :update, params: { id: question, question: { title: "new title", body: "new body" } }, format: :js
         question.reload
         expect(question.title).to eq("new title")
         expect(question.body).to eq("new body")
       end
 
       it "redirects to updated question" do
-        patch :update, params: { id: question, question: attributes_for(:question) }
+        patch :update, params: { id: question, question: attributes_for(:question) }, format: :js
         expect(response).to redirect_to question
       end
     end
@@ -106,7 +114,7 @@ RSpec.describe QuestionsController, type: :controller do
         patch :update, params: { 
           id: question, 
           question: attributes_for(:question, :invalid) 
-        }
+        }, format: :js
       end
 
       it "do not change the question" do
@@ -116,7 +124,20 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it "re-renders edit view" do
-        expect(response).to render_template :edit
+        expect(response).to render_template :update
+      end
+    end
+
+    context 'user is not author' do
+      let(:other_user) { create :user }
+      let!(:other_question) { create :question, author: other_user }
+
+      it "doesn't change other's question" do
+        patch :update, params: { id: other_question, question: { title: 'Edited Title', body: 'Edited Body' } }, format: :js
+        other_question.reload
+
+        expect(other_question.title).to eq 'Title of the question'
+        expect(other_question.body).to eq 'Body of the question'
       end
     end
   end
