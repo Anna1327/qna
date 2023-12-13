@@ -3,9 +3,8 @@ h3= t('.header')
 .question
   p#question_title= @question.title
   p#question_body= @question.body
-  - if question.files.attached?
-    - question.files.each do |file|
-      p= link_to file.filename.to_s, url_for(file)
+  p#question_files
+    =render 'files', question: @question
 
   - if user_signed_in? && current_user.author_of?(question)
     p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'
@@ -21,6 +20,9 @@ h3= t('.header')
     p
       = f.label :body
       = f.text_area :body
+    p
+      = f.label :files
+      = f.file_field :files, multiple: true
     p= f.submit t('questions.edit.update')
 
 h4= t('.answers')
