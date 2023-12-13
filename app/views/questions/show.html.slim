@@ -22,7 +22,7 @@ h3= t('.header')
       = f.text_area :body
     p
       = f.label :files
-      = f.file_field :files, multiple: true
+      = f.file_field :files, multiple: true, direct_upload: true
     p= f.submit t('questions.edit.update')
 
 h4= t('.answers')
@@ -42,5 +42,5 @@ h4= t('.answers')
         = f.text_area :body
       p
         = f.label :files
-        = f.file_field :files, multiple: true
+        = f.file_field :files, multiple: true, direct_upload: true
       p= f.submit t('answers.create.submit')
