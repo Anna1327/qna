@@ -16,14 +16,14 @@ RSpec.describe FilesController, type: :controller do
         it "deletes question's file" do
           expect do 
             delete :destroy, 
-              params: { id: question.files.first, question_id: question.id }, 
+              params: { id: question.files.first }, 
               format: :js
           end.to change(question.files, :count).by(-1)
         end
 
         it 'renders to show question' do
           delete :destroy, 
-            params: { id: question.files.first, question_id: question.id }, 
+            params: { id: question.files.first }, 
             format: :js
           expect(response).to redirect_to assigns(:question)
         end
@@ -38,14 +38,14 @@ RSpec.describe FilesController, type: :controller do
 
           expect do
             delete :destroy, 
-              params: { id: other_question.files.first, question_id: other_question.id }, 
+              params: { id: other_question.files.first }, 
               format: :js
           end.not_to change(other_question.files, :count)
         end
 
         it 'renders to show question' do
           delete :destroy, 
-            params: { id: other_question.files.first, question_id: other_question.id }, 
+            params: { id: other_question.files.first }, 
             format: :js
           expect(response).to redirect_to assigns(:question)
         end
@@ -58,14 +58,14 @@ RSpec.describe FilesController, type: :controller do
       it "can't delete question's file" do
         expect do
           delete :destroy, 
-            params: { id: question.files.first, question_id: question.id },
+            params: { id: question.files.first },
             format: :js
         end.not_to change(question.files, :count)
       end
 
       it 'renders destroy' do
         delete :destroy, 
-          params: { id: question.files.first, question_id: question.id }, 
+          params: { id: question.files.first }, 
           format: :js
         expect(response).to have_http_status(:unauthorized)
       end

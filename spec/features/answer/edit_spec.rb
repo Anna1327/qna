@@ -50,6 +50,17 @@ feature 'User can edit his answer', %q{
         expect(page).to have_link 'spec_helper.rb'
       end
     end
+
+    scenario "can delete files when edits his answer" do
+      within ".answers li#answer-#{answer.id}" do
+        attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
+        click_on I18n.t('answers.edit.update')
+
+        find("#answer_#{answer.id}_files").first(:link, 'Delete file').click
+        expect(page).not_to have_link 'rails_helper.rb'
+        expect(page).to have_link 'spec_helper.rb'
+      end
+    end
   end
 
   describe "Authenticated other user", js: true do
