@@ -78,3 +78,7 @@ en:
         other: "You can not delete other's answer"
     mark_as_the_best:
       submit: "Mark as the best"
+
+  files:
+    destroy:
+      delete: "Delete file"

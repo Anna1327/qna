@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :files, shallow: true, only: :destroy
   
   root to: 'questions#index'
 end

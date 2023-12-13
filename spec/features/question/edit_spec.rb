@@ -42,7 +42,7 @@ feature 'Authenticated user can edit his question', %q{
       end
     end
 
-    scenario 'add files when edit his question', js: true do
+    scenario 'can add files when edit his question', js: true do
       click_on I18n.t('questions.edit.update')
 
       within '.question' do
@@ -50,6 +50,20 @@ feature 'Authenticated user can edit his question', %q{
         click_on I18n.t('questions.edit.update')
 
         expect(page).to have_link 'rails_helper.rb'
+        expect(page).to have_link 'spec_helper.rb'
+      end
+    end
+
+    scenario 'can delete files when edit his question', js: true do
+      click_on I18n.t('questions.edit.update')
+
+      within '.question' do
+        attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
+        click_on I18n.t('questions.edit.update')
+
+        find('.question p#question_files').first(:link, 'Delete').click
+
+        expect(page).not_to have_link 'rails_helper.rb'
         expect(page).to have_link 'spec_helper.rb'
       end
     end
