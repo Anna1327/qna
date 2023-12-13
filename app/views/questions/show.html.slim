@@ -3,8 +3,9 @@ h3= t('.header')
 .question
   p#question_title= @question.title
   p#question_body= @question.body
-  - if question.file.attached?
-    p= link_to question.file.filename.to_s, url_for(question.file)
+  - if question.files.attached?
+    - question.files.each do |file|
+      p= link_to file.filename.to_s, url_for(file)
 
   - if user_signed_in? && current_user.author_of?(question)
     p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'
