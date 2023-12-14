@@ -3,6 +3,8 @@ h3= t('.header')
 .question
   p#question_title= @question.title
   p#question_body= @question.body
+  p#question_files
+    =render 'shared/files', resource: @question
 
   - if user_signed_in? && current_user.author_of?(question)
     p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'
@@ -18,6 +20,9 @@ h3= t('.header')
     p
       = f.label :body
       = f.text_area :body
+    p
+      = f.label :files
+      = f.file_field :files, multiple: true, direct_upload: true
     p= f.submit t('questions.edit.update')
 
 h4= t('.answers')
@@ -35,4 +40,7 @@ h4= t('.answers')
       p
         = f.label :body
         = f.text_area :body
+      p
+        = f.label :files
+        = f.file_field :files, multiple: true, direct_upload: true
       p= f.submit t('answers.create.submit')

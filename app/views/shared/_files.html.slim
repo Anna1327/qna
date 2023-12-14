@@ -1,0 +1,4 @@
+- if resource&.files.attached?
+  - resource&.files.each do |file|
+    p= link_to file.filename.to_s, url_for(file)
+    p= link_to t('files.destroy.delete'), file_path(file), method: :delete, remote: true

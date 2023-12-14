@@ -3,6 +3,9 @@
     = render 'shared/errors', resource: answer
   li id="answer-#{answer.id}" class=answer_class
     p= "#{answer.body}"
+    div id="answer_#{answer.id}_files"
+      = render 'shared/files', resource: answer
+
     - if current_user&.author_of?(answer.question)
       p= link_to t('answers.mark_as_the_best.submit'),
               mark_as_the_best_answer_path(answer.question, best_answer: answer.id),
