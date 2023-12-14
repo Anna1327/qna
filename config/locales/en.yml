@@ -82,3 +82,9 @@ en:
   files:
     destroy:
       delete: "Delete file"
+  links:
+    new:
+      header: "Links:"
+      add_link: "Add link"
+    index:
+      header: "Links:"

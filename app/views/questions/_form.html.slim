@@ -1,0 +1,18 @@
+= form_with model: @question, local: form_local, class: form_class do |f|
+  p
+    = f.label :title
+    = f.text_field :title
+  p
+    = f.label :body
+    = f.text_area :body
+  p
+    = f.label :files
+    = f.file_field :files, multiple: true, direct_upload: true
+  
+  p =t('links.new.header')
+  #links
+    = f.fields_for :links do |link|
+    .add_link
+      = link_to_add_association t('links.new.add_link'), f, :links, partial: 'links/link_fields'
+  
+  p= f.submit submit_text
