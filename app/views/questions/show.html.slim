@@ -17,17 +17,7 @@ h3= t('.header')
   .question_errors
     = render 'shared/errors', resource: @question
 
-  = form_with model: @question, local: false, class: 'hidden' do |f|
-    p
-      = f.label :title
-      = f.text_field :title
-    p
-      = f.label :body
-      = f.text_area :body
-    p
-      = f.label :files
-      = f.file_field :files, multiple: true, direct_upload: true
-    p= f.submit t('questions.edit.update')
+  = render 'form', form_local: false, form_class: 'hidden', submit_text: t('questions.edit.update')
 
 h4= t('.answers')
 

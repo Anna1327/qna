@@ -14,19 +14,18 @@ feature 'User can add links to question', %q{
   describe 'Authenticated user', js: true do
     background do
       sign_in(user)
-
       visit new_question_path
-    end
 
-    scenario 'User can add link when asks question' do
       fill_in 'Title', with: 'Test question'
       fill_in 'Body', with: 'Test body'
 
-      click_on "Add link"
+      click_on I18n.t('links.new.add_link')
 
       fill_in 'Link name', with: 'My gist'
       fill_in 'Url', with: gist_url
+    end
 
+    scenario 'User can add link when asks question' do
       click_on 'Ask'
 
       expect(page).to have_link 'My gist', href: gist_url
@@ -35,12 +34,17 @@ feature 'User can add links to question', %q{
     scenario 'User can add multiple links when asks question' do
       url = 'https://thinknetica.com/'
 
-      click_on "Add link"
+      click_on I18n.t('links.new.add_link')
 
       within all('.nested_fields').last do
         fill_in 'Link name', with: 'Thinknetica'
         fill_in 'Url', with: url
       end
+
+      click_on I18n.t('questions.new.ask')
+
+      expect(page).to have_link 'My gist', href: gist_url
+      expect(page).to have_link 'Thinknetica', href: url
     end
   end
 end

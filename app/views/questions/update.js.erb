@@ -6,6 +6,7 @@ document
 document.getElementById('question_title').innerText = '<%= @question.title %>';
 document.getElementById('question_body').innerText = '<%= @question.body %>';
 document.getElementById('question_files').innerHTML = '<%= render 'shared/files', resource: @question  %>';
+document.getElementById('question_links').innerHTML = '<%= render 'shared/links', resource: @question  %>';
 document.querySelector('.question form').classList.toggle('hidden')
 document.querySelector('.question .edit-question-link').classList.toggle('hidden')
 <% end %>
