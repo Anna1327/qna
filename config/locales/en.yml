@@ -80,6 +80,8 @@ en:
       submit: "Mark as the best"
 
   files:
+    index:
+      header: "Files:"
     destroy:
       delete: "Delete file"
   links:

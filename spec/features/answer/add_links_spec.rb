@@ -42,7 +42,7 @@ feature 'User can add links to answer', %q{
         within '.answers' do
           click_on I18n.t('links.new.add_link')
 
-          within all('.nested_fields').last do
+          within all('.nested-fields').last do
             fill_in 'Link name', with: 'Thinknetica'
             fill_in 'Url', with: url
           end
