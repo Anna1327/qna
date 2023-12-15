@@ -2,6 +2,6 @@
   p =t('links.index.header')
   - resource.links.each do |link|
     div id="link_id_#{link.id}"
-      p= link_to link.name, url_for(link.url)
+      p= link_to link.name, url_for(link.url), class: 'resource-link', target: '_blank'
       - if current_user&.author_of?(resource)
         p= link_to t('links.destroy.delete'), link_path(link), method: :delete, remote: true

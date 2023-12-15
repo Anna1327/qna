@@ -11,6 +11,7 @@ require("jquery");
 require("@nathanvda/cocoon");
 require("../answers");
 require("../questions");
+require("../gists_links");
 
 // window.jQuery = $;
 // window.$ = $;

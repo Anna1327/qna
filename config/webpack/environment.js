@@ -8,5 +8,7 @@ environment.plugins.prepend(
     jQuery: "jquery/src/jquery",
   })
 );
+const Dotenv = require("dotenv-webpack");
+environment.plugins.prepend("Dotenv", new Dotenv());
 
 module.exports = environment;

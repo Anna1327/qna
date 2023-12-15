@@ -14,9 +14,9 @@ const links = document.querySelector('.new-answer #answer_links .nested-fields')
 
 if (links) {
   links.forEach(elem => {
-    console.log("test console");
     elem.parentNode.removeChild(elem);
   });
 }
+document.dispatchEvent(new Event('gistRenderer'))
 
 
