@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :link do
-    name { "link name" }
-    url { "link url" }
+    name { "test link" }
+    url { "https://thinknetica.teachbase.ru/" }
   end
 end

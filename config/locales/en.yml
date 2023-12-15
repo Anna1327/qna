@@ -86,5 +86,8 @@ en:
     new:
       header: "Links:"
       add_link: "Add link"
+      remove_link: "Remove link"
     index:
       header: "Links:"
+    destroy:
+      delete: "Delete link"

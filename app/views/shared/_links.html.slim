@@ -1,5 +1,7 @@
 - if resource.links.present?
   p =t('links.index.header')
   - resource.links.each do |link|
-    div
+    div id="link_id_#{link.id}"
       p= link_to link.name, url_for(link.url)
+      - if current_user&.author_of?(resource)
+        p= link_to t('links.destroy.delete'), link_path(link), method: :delete, remote: true
