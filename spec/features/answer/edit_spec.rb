@@ -61,6 +61,33 @@ feature 'User can edit his answer', %q{
         expect(page).to have_link 'spec_helper.rb'
       end
     end
+
+    scenario 'can add links when edit his answer' do
+      thinknetica_url = 'https://thinknetica.com/'
+      google_url = "https://www.google.ru/"
+
+      within ".answers li#answer-#{answer.id}" do
+        click_on I18n.t('answers.edit.update')
+        click_on I18n.t('links.new.add_link')
+
+        within all('.nested_fields').last do
+          fill_in 'Link name', with: 'Thinknetica'
+          fill_in 'Url', with: thinknetica_url
+        end
+
+        click_on I18n.t('links.new.add_link')
+
+        within all('.nested_fields').last do
+          fill_in 'Link name', with: 'Google'
+          fill_in 'Url', with: google_url
+        end
+
+        click_on I18n.t('answers.edit.update')
+
+        expect(page).to have_link 'Thinknetica', href: thinknetica_url
+        expect(page).to have_link 'Google', href: google_url
+      end
+    end
   end
 
   describe "Authenticated other user", js: true do

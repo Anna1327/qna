@@ -7,10 +7,7 @@
       = render 'shared/files', resource: answer
 
     div id="answer_#{answer.id}_links"
-      p Links:
-      ul
-      - answer.links.each do |link|
-        li= link_to link.name, link.url
+      = render 'shared/links', resource: answer
 
     - if current_user&.author_of?(answer.question)
       p= link_to t('answers.mark_as_the_best.submit'),

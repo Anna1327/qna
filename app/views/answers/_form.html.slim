@@ -10,4 +10,10 @@
     = f.label :files
     = f.file_field :files, multiple: true, direct_upload: true
 
+  p = t('links.new.header')
+  #answer_links
+    = f.fields_for :links do |link|
+    .add_link
+      = link_to_add_association t('links.new.add_link'), f, :links, partial: 'links/link_fields'
+
   p= f.submit t('answers.edit.update')

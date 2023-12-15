@@ -30,7 +30,7 @@ h4= t('.answers')
     .answer_errors
       = render 'shared/errors', resource: @answer
 
-    = form_with model: [question, @answer], local: false, class: 'new-answer' do |f|
+    = form_with model: [@question, @answer], local: false, class: 'new-answer' do |f|
       p
         = f.label :body
         = f.text_area :body
@@ -38,13 +38,10 @@ h4= t('.answers')
         = f.label :files
         = f.file_field :files, multiple: true, direct_upload: true
 
-      p Links:
-      p 
-        = f.fields_for :links do |l|
-          p 
-            = l.label :name, 'Link name'
-            = l.text_field :name
-          p 
-            = l.label :url
-            = l.text_field :url
+      p = t('links.new.header')
+      #answer_links
+        = f.fields_for :links do |link|
+        .add_link
+          = link_to_add_association t('links.new.add_link'), f, :links, partial: 'links/link_fields'
+
       p= f.submit t('answers.create.submit')

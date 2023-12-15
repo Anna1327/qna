@@ -69,15 +69,22 @@ feature 'Authenticated user can edit his question', %q{
     end
 
     scenario 'can add links when edit his question' do
-      url = 'https://thinknetica.com/'
+      thinknetica_url = 'https://thinknetica.com/'
 
       click_on I18n.t('questions.edit.update')
-      click_on I18n.t('links.new.add_link')
 
-      within all('.nested_fields').last do
-        fill_in 'Link name', with: 'Thinknetica'
-        fill_in 'Url', with: url
+      within '.question' do
+        click_on I18n.t('links.new.add_link')
+
+        within all('.nested_fields').last do
+          fill_in 'Link name', with: 'Thinknetica'
+          fill_in 'Url', with: thinknetica_url
+        end
+
+        click_on I18n.t('questions.edit.update')
       end
+
+      expect(page).to have_link 'Thinknetica', href: thinknetica_url
     end
   end
 
