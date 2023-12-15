@@ -1,0 +1,8 @@
+div class='hidden reward_fields'
+  div
+    = reward.label :title, 'Reward title'
+    = reward.text_field :title
+  div
+    = reward.label :image
+    = reward.file_field :image
+  = link_to t('rewards.new.remove'), '#', class: 'remove-reward-link'

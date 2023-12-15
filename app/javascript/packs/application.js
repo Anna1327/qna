@@ -12,6 +12,7 @@ require("@nathanvda/cocoon");
 require("../answers");
 require("../questions");
 require("../gists_links");
+require("../rewards");
 
 // window.jQuery = $;
 // window.$ = $;

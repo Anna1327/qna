@@ -33,6 +33,7 @@ en:
   main:
     sign_in: "Sign in"
     sign_out: "Sign out"
+    my_rewards: " My Rewards"
 
   shared:
     errors:
@@ -93,3 +94,12 @@ en:
       header: "Links:"
     destroy:
       delete: "Delete link"
+  rewards:
+    new:
+      header: "Rewards:"
+      add_reward: "Add Reward"
+    index:
+      header: "Rewards:"
+    errors:
+      blank: "Can't be blank"
+      only_image: "Available only images"

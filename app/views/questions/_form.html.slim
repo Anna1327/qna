@@ -15,4 +15,9 @@
     .add_link
       = link_to_add_association t('links.new.add_link'), f, :links, partial: 'links/link_fields'
   
+  #reward
+    = f.fields_for :reward do |reward|
+      = render 'rewards/reward_fields', reward: reward
+    = link_to t('rewards.new.add_reward'), '#', class: 'add-reward-link'
+  
   p= f.submit submit_text

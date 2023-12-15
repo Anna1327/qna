@@ -1,0 +1,12 @@
+h3 =t('.header')
+
+- current_user.rewards.each do |reward|
+  div class='reward-item'
+    div
+      div
+        = reward.title
+        =image_tag url_for(reward.image)
+      div
+        div
+          p= link_to reward.question.title, question_path(reward.question)
+          p= reward.question.body

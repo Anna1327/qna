@@ -1,6 +1,7 @@
 div
   -if user_signed_in?
     p= current_user.email
+    p= link_to t('main.rewards'), rewards_path
     p= button_to t('main.sign_out'), destroy_user_session_path, method: :delete
   -else
     p= link_to t('main.sign_in'), new_user_session_path

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :files, shallow: true, only: :destroy
   resources :links, shallow: true, only: :destroy
+  resources :rewards, shallow: true, only: :index
   
   root to: 'questions#index'
 end
