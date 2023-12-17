@@ -33,6 +33,7 @@ en:
   main:
     sign_in: "Sign in"
     sign_out: "Sign out"
+    my_rewards: " My Rewards"
 
   shared:
     errors:
@@ -80,5 +81,25 @@ en:
       submit: "Mark as the best"
 
   files:
+    index:
+      header: "Files:"
     destroy:
       delete: "Delete file"
+  links:
+    new:
+      header: "Links:"
+      add_link: "Add link"
+      remove_link: "Remove link"
+    index:
+      header: "Links:"
+    destroy:
+      delete: "Delete link"
+  rewards:
+    new:
+      header: "Rewards:"
+      add_reward: "Add Reward"
+    index:
+      header: "Rewards:"
+    errors:
+      blank: "Can't be blank"
+      only_image: "Available only images"

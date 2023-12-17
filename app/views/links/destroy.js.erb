@@ -1,0 +1,3 @@
+<% if @link.destroyed? %>
+  document.getElementById(`link_id_${<%= @link.id %>}`).remove()
+<% end %>

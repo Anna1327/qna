@@ -7,4 +7,5 @@ document
   document
     .querySelector(".answers li#answer-<%= @answer.id %>")
     .innerHTML = '<%= j render @answer, answer_class: @answer.best? ? 'best_answer' : nil %>';
+  document.dispatchEvent(new Event('gistRenderer'))
 <% end %>

@@ -6,5 +6,17 @@ document
   document
       .querySelector('.answers')
       .insertAdjacentHTML('beforeend', '<%= j render @answer, answer_class: @answer.best? ? 'best_answer' : nil %>')
-  document.querySelector('.new-answer #answer_body').value = ''
 <% end %>
+
+document.querySelector('.new-answer #answer_body').value = ''
+
+const links = document.querySelector('.new-answer #answer_links .nested-fields')
+
+if (links) {
+  links.forEach(elem => {
+    elem.parentNode.removeChild(elem);
+  });
+}
+document.dispatchEvent(new Event('gistRenderer'))
+
+

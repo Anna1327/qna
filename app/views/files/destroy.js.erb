@@ -1,2 +1,3 @@
-  document
-    .innerHTML = '<%= j render @question %>';
+<% if @file.destroyed? %>
+  document.getElementById(`file_id_${<%= @file.id %>}`).remove()
+<% end %>

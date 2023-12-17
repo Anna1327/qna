@@ -3,8 +3,12 @@ h3= t('.header')
 .question
   p#question_title= @question.title
   p#question_body= @question.body
+
   p#question_files
     =render 'shared/files', resource: @question
+  
+  p#question_links
+    =render 'shared/links', resource: @question
 
   - if user_signed_in? && current_user.author_of?(question)
     p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'
@@ -12,18 +16,8 @@ h3= t('.header')
 
   .question_errors
     = render 'shared/errors', resource: @question
-  
-  = form_with model: @question, local: false, class: 'hidden' do |f|
-    p
-      = f.label :title
-      = f.text_field :title
-    p
-      = f.label :body
-      = f.text_area :body
-    p
-      = f.label :files
-      = f.file_field :files, multiple: true, direct_upload: true
-    p= f.submit t('questions.edit.update')
+
+  = render 'form', form_local: false, form_class: 'hidden', submit_text: t('questions.edit.update')
 
 h4= t('.answers')
 
@@ -36,11 +30,18 @@ h4= t('.answers')
     .answer_errors
       = render 'shared/errors', resource: @answer
 
-    = form_with model: [question, @answer], local: false, class: 'new-answer' do |f|
+    = form_with model: [@question, @answer], local: false, class: 'new-answer' do |f|
       p
         = f.label :body
         = f.text_area :body
       p
         = f.label :files
         = f.file_field :files, multiple: true, direct_upload: true
+
+      p = t('links.new.header')
+      #answer_links
+        = f.fields_for :links do |link|
+        .add_link
+          = link_to_add_association t('links.new.add_link'), f, :links, partial: 'links/link_fields'
+
       p= f.submit t('answers.create.submit')
