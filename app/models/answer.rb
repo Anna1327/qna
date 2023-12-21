@@ -1,7 +1,7 @@
 class Answer < ApplicationRecord
   include Linkable
+  include Attachable
 
-  has_many_attached :files
   has_one :reward, dependent: :destroy
 
   belongs_to :question
