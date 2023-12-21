@@ -1,13 +1,10 @@
 class Answer < ApplicationRecord
   include Linkable
   include Attachable
-
-  has_one :reward, dependent: :destroy
+  include Rewardable
 
   belongs_to :question
   belongs_to :author, class_name: 'User'
-
-  accepts_nested_attributes_for :reward, reject_if: :all_blank
 
   validates :body, presence: true
 
