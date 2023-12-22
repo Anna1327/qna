@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require './spec/controllers/concerns/voted_spec'
 
 RSpec.describe QuestionsController, type: :controller do
   it_behaves_like "voted"

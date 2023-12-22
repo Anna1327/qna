@@ -1,7 +1,8 @@
-p= link_to 'Like', send("liked_#{resource.class.name.downcase}_path", resource),
+div class='votes center' data-resource-id=resource.id data-resource-name=resource.class.name.downcase
+  p= link_to 'Like', send("liked_#{resource.class.name.downcase}_path", resource),
         data: { type: 'json', "#{resource.class.name.downcase}_id": resource.id },
         remote: true, method: :post, class: "#{(!user_signed_in? || current_user.author_of?(resource)) ? 'disabled' : 'enabled'}"
-p.count= resource.vote_count
-p= link_to 'Dislike', send("disliked_#{resource.class.name.downcase}_path", resource),
+  p.count= resource.vote_count
+  p= link_to 'Dislike', send("disliked_#{resource.class.name.downcase}_path", resource),
         data: { type: 'json', "#{resource.class.name.downcase}_id": resource.id },
         remote: true, method: :post, class: "#{(!user_signed_in? || current_user.author_of?(resource)) ? 'disabled' : 'enabled'}"

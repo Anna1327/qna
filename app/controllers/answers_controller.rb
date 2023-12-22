@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!, only: [:create, :update, :destroy, :mark_as_the_best]
 
   def new
