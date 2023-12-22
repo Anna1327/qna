@@ -1,14 +1,18 @@
 h3= t('.header')
 
 .question
-  p#question_title= @question.title
-  p#question_body= @question.body
-
-  p#question_files
+  div class='votes' data-question-id=@question.id
+    =render 'votes/vote', resource: @question
+  div class='question_title'
+    p#question_title= @question.title
+  div class='question_body'
+    p#question_body= @question.body
+  div class='question_files'
+    p#question_files
     =render 'shared/files', resource: @question
-  
-  p#question_links
-    =render 'shared/links', resource: @question
+  div class='question_links'
+    p#question_links
+      =render 'shared/links', resource: @question
 
   - if user_signed_in? && current_user.author_of?(question)
     p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'

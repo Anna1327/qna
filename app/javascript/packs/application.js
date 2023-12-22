@@ -13,6 +13,7 @@ require("../answers");
 require("../questions");
 require("../gists_links");
 require("../rewards");
+require("../votes");
 
 // window.jQuery = $;
 // window.$ = $;
