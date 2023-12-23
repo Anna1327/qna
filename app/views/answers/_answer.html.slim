@@ -3,6 +3,10 @@
     = render 'shared/errors', resource: answer
   li id="answer-#{answer.id}" class=answer_class
     p= "#{answer.body}"
+
+    div class="votes" data-answer-id=@answer.id
+      = render 'votes/vote', resource: answer
+
     div id="answer_#{answer.id}_files"
       = render 'shared/files', resource: answer
 

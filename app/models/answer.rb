@@ -1,13 +1,11 @@
 class Answer < ApplicationRecord
-  has_many_attached :files
-  has_many :links, dependent: :destroy, as: :linkable
-  has_one :reward, dependent: :destroy
+  include Linkable
+  include Attachable
+  include Rewardable
+  include Votable
 
   belongs_to :question
   belongs_to :author, class_name: 'User'
-
-  accepts_nested_attributes_for :links, reject_if: :all_blank
-  accepts_nested_attributes_for :reward, reject_if: :all_blank
 
   validates :body, presence: true
 
