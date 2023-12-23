@@ -6,13 +6,11 @@ class Vote < ApplicationRecord
   validate :validation_by_author
 
   def liked
-    self.update(value: 1) if self.value.zero?
-    self.update(value: 0) if self.value == -1
+    self.destroy if self.value == -1
   end
 
   def disliked
-    self.update(value: -1) if self.value.zero?
-    self.update(value: 0) if self.value == 1
+    self.destroy if self.value == 1
   end
 
   def validation_by_author

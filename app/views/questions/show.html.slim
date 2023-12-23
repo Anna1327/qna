@@ -14,7 +14,7 @@ h3= t('.header')
     p#question_links
       =render 'shared/links', resource: @question
 
-  - if user_signed_in? && current_user.author_of?(question)
+  - if current_user.author_of?(question)
     p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'
     p= link_to t('.edit'), '#', data: { question_id: @question.id }, class: 'edit-question-link'
 
