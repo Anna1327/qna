@@ -2,7 +2,8 @@
   div class="answer_errors_#{answer.id}"
     = render 'shared/errors', resource: answer
   li id="answer-#{answer.id}" class=answer_class
-    p= "#{answer.body}"
+    p.answer-body= "#{answer.body}"
+    p.answer-author= "(#{answer.author.email})"
 
     div class="votes" data-answer-id=@answer.id
       = render 'votes/vote', resource: answer

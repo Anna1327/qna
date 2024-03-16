@@ -5,6 +5,8 @@ class AnswersController < ApplicationController
 
   before_action :authenticate_user!, only: [:create, :update, :destroy, :mark_as_the_best]
 
+  after_action :publish_answer, only: [:create, :update]
+
   def new
   end
 
@@ -34,6 +36,17 @@ class AnswersController < ApplicationController
   end
 
   private
+
+  def publish_answer
+    return if @answer.errors.any?
+
+    gon.push({
+      answer_owner: answer.author.id,
+      question_owner: @question.author.id
+    })
+
+    ActionCable.server.broadcast("question_#{answer.question.id}_answers", answer.as_json)
+  end
 
   def answer
     @answer ||= Answer.with_attached_files.find(params[:id])

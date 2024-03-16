@@ -63,6 +63,10 @@ class QuestionsController < ApplicationController
 
   def question
     @question ||= params[:id] ? Question.with_attached_files.find(params[:id]) : Question.new
+    gon.push({
+      current_user_id: current_user&.id,
+      question_id: @question.id
+    })
   end
 
   helper_method :question
