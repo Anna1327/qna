@@ -45,7 +45,14 @@ class AnswersController < ApplicationController
       question_owner: @question.author.id
     })
 
-    ActionCable.server.broadcast("question_#{answer.question.id}_answers", answer.as_json)
+    ActionCable.server.broadcast(
+      "question_#{@answer.question.id}_answers",
+      {
+        answer: @answer.as_json,
+        author: @answer.author.as_json,
+        vote_count: @answer.vote_count
+      }.as_json
+    )
   end
 
   def answer
