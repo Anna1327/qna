@@ -3,6 +3,7 @@ class Answer < ApplicationRecord
   include Attachable
   include Rewardable
   include Votable
+  include Commentable
 
   belongs_to :question
   belongs_to :author, class_name: 'User'

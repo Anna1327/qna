@@ -103,3 +103,10 @@ en:
     errors:
       blank: "Can't be blank"
       only_image: "Available only images"
+  comments:
+    index:
+      header: "All comments:"
+    new:
+      create: "Add comment"
+    destroy:
+      delete: "Delete comment"

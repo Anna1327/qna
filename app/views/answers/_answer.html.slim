@@ -14,6 +14,10 @@
     div id="answer_#{answer.id}_links"
       = render 'shared/links', resource: answer
 
+    hr
+    div id="answer_#{answer.id}_comments"
+      = render 'shared/comments', resource: answer
+
     - if current_user&.author_of?(answer.question)
       p= link_to t('answers.mark_as_the_best.submit'),
               mark_as_the_best_answer_path(answer.question, best_answer: answer.id),

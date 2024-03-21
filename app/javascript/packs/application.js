@@ -15,6 +15,7 @@ require("../questions");
 require("../gists_links");
 require("../rewards");
 require("../votes");
+require("../comments");
 
 // window.jQuery = $;
 // window.$ = $;

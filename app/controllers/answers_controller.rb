@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
 
   before_action :authenticate_user!, only: [:create, :update, :destroy, :mark_as_the_best]
 
-  after_action :publish_answer, only: [:create, :update]
+  after_action :publish_answer, only: [:create]
 
   def new
   end

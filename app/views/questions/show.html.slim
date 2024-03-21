@@ -13,6 +13,10 @@ h3= t('.header')
   div class='question_links'
     p#question_links
       =render 'shared/links', resource: @question
+  hr
+  div class='question_comments'
+    p#question_comments
+      =render 'shared/comments', resource: @question
 
   - if user_signed_in? && current_user.author_of?(question)
     p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'comments/new'
   devise_for :users
 
   concern :votable do
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   resources :files, shallow: true, only: :destroy
   resources :links, shallow: true, only: :destroy
   resources :rewards, shallow: true, only: :index
+  resources :comments, only: %i[create destroy]
   
   root to: 'questions#index'
 
