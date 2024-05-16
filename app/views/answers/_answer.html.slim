@@ -2,7 +2,8 @@
   div class="answer_errors_#{answer.id}"
     = render 'shared/errors', resource: answer
   li id="answer-#{answer.id}" class=answer_class
-    p= "#{answer.body}"
+    p.answer-body= "#{answer.body}"
+    p.answer-author= "(#{answer.author.email})"
 
     div class="votes" data-answer-id=@answer.id
       = render 'votes/vote', resource: answer
@@ -12,6 +13,10 @@
 
     div id="answer_#{answer.id}_links"
       = render 'shared/links', resource: answer
+
+    hr
+    div id="answer_#{answer.id}_comments"
+      = render 'shared/comments', resource: answer
 
     - if current_user&.author_of?(answer.question)
       p= link_to t('answers.mark_as_the_best.submit'),

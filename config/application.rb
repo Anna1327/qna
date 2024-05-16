@@ -17,6 +17,8 @@ module Qna
     # the framework and any gems in your application.
     config.active_storage.replace_on_assign_to_many = false
 
+    config.action_cable.disable_request_forgery_protection = false
+
     config.generators do |g|
       g.test_framework :rspec,
                         view_specs: false,

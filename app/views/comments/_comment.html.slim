@@ -1,0 +1,9 @@
+div id="comment_id_#{comment.id}"
+  .comment-body =comment.body
+  .comment-author ="by: #{comment.author.email}"
+  - if current_user&.author_of?(comment)
+    p= link_to t('comments.destroy.delete'),
+            comment_path(comment),
+            method: :delete,
+            remote: true
+  hr

@@ -1,0 +1,41 @@
+<li id="answer-{{answer.id}}">
+    <div>
+        <div>
+            <p class='answer-body'>{{ answer.body }}</p>
+            <p class='answer-author'>({{ author.email }})</p>
+            <div id="answer_{{answer.id}}_files">
+
+            </div>
+            <div id="answer_{{answer.id}}_links">
+
+            </div>
+        </div>
+                <div>
+            <div class='votes center' data-resource-id={{answer.id}} data-resource-name='answer'>
+                <p>
+                    <a data-type="json" 
+                    data-answer-id="{{answer.id}}" 
+                    class="vote-up {{#if disabled_vote }}disabled{{/if}}" 
+                    data-remote="true" 
+                    rel="nofollow" 
+                    data-method="post" 
+                    href="/answers/{{answer.id}}/liked">Like
+                    </a>
+                </p>
+                <p class='vote-count'>
+                    {{vote_count}}
+                </p>
+                <p>
+                    <a data-type="json" 
+                    data-answer-id="{{answer.id}}" 
+                    class="vote-down {{#if disabled_vote }}disabled{{/if}}" 
+                    data-remote="true" 
+                    rel="nofollow" 
+                    data-method="post" 
+                    href="/answers/{{answer.id}}/disliked">Dislike
+                    </a>
+                </p>
+            </div>
+        </div>    
+    </div>
+</li>
