@@ -64,19 +64,25 @@ class CommentsController < ApplicationController
   def publish_comment
     return if @comment.errors.any?
 
-    ActionCable.server.broadcast('comments', {
-      action: 'create',
-      comment: @comment.as_json,
-      author: @comment.author.as_json
-    })
+    ActionCable.server.broadcast(
+      "question_#{@comment.commentable_id}_comment", 
+      {
+        action: 'create',
+        comment: @comment.as_json,
+        author: @comment.author.as_json
+      }
+    )
   end
 
   def publish_delete_comment
     return if @comment.errors.any?
 
-    ActionCable.server.broadcast('comments', {
-      action: 'delete',
-      comment_id: @comment_id
-    })
+    ActionCable.server.broadcast(
+      "question_#{@comment.commentable_id}_comment", 
+      {
+        action: 'delete',
+        comment_id: @comment_id
+      }
+    )
   end
 end

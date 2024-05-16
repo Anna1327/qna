@@ -7,6 +7,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "^5.4.4",
+    "bootstrap": "^5.3.3",
     "actioncable": "^5.2.8-1",
     "dotenv": "^16.3.1",
     "gist-client": "^1.1.1",
@@ -18,7 +19,9 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "bootstrap": "^5.3.3",
     "dotenv-webpack": "^8.0.1",
-    "webpack-dev-server": "^4.15.1"
+    "handlebars-loader": "^1.7.3",
+    "webpack-dev-server": "^5.0.4"
   }
 }
