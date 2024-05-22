@@ -13,7 +13,9 @@ module Services
       authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
       return authorization.user if authorization
 
-      email = auth.info[:email]
+      email = auth.info&.email
+      return unless email
+
       user = User.where(email: email).first
       if user
         user.create_authorization(auth)

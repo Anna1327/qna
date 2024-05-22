@@ -4,7 +4,7 @@ class CreateAuthorizations < ActiveRecord::Migration[6.1]
       t.references :user, null: false, foreign_key: true
       t.string :provider
       t.string :uid
-
+      t.string :confirmation_token, null: true
       t.timestamps
     end
 

@@ -50,4 +50,32 @@ RSpec.describe OauthCallbacksController, type: :controller do
       end
     end
   end
+
+  describe 'Vkontakte' do
+    let(:oauth_data) { OmniAuth::AuthHash.new(provider: 'vkontakte', uid: 123) }
+
+    it 'find user by auth data' do
+      allow(request.env).to receive(:[]).and_call_original
+      allow(request.env).to receive(:[]).with('omniauth.auth').and_return(oauth_data)
+      expect(User).to receive(:find_for_oauth).with(oauth_data)
+      get :vkontakte
+    end
+
+    context 'when user exists' do
+      let!(:user) { create :user }
+
+      before do
+        allow(User).to receive(:find_for_oauth).and_return(user)
+        get :vkontakte
+      end
+
+      it 'login user' do
+        expect(subject.current_user).to eq user
+      end
+
+      it 'redirects to root page' do
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
 end

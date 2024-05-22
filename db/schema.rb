@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2024_05_19_213741) do
     t.bigint "user_id", null: false
     t.string "provider"
     t.string "uid"
+    t.string "confirmation_token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["provider", "uid"], name: "index_authorizations_on_provider_and_uid"

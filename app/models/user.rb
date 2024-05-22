@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:github]
+         :omniauthable, omniauth_providers: [:github, :vkontakte]
   
   has_many :authorizations, dependent: :destroy
   has_many :questions, class_name: 'Question', foreign_key: 'author_id', dependent: :destroy
@@ -22,5 +22,9 @@ class User < ApplicationRecord
 
   def create_authorization(auth)
     self.authorizations.create(provider: auth.provider, uid: auth.uid.to_s)
+  end
+
+  def email_confirmed?(auth)
+    self.authorizations.find_by(uid: auth.uid, provider: auth.provider)&.confirmed?
   end
 end

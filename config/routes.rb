@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   get 'comments/new'
-  devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks'} 
+ 
+  resources :authorizations, only: %i[new create] do
+    get 'email_confirmation/:confirmation_token', action: :email_confirmation, as: :email_confirmation
+  end
 
   concern :votable do
     member do
