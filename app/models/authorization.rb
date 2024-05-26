@@ -1,4 +1,6 @@
 class Authorization < ApplicationRecord
+  after_commit :set_token, on: :create
+
   belongs_to :user
 
   validates :provider, :uid, presence: true

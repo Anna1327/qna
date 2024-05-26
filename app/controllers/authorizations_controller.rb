@@ -14,8 +14,8 @@ class AuthorizationsController < ApplicationController
     end
 
     unless @authorization
-      @authorization = @user.create_authorization(OmniAuth::AuthHash.new(auth_params))
-      @authorization.set_token
+      auth = OmniAuth::AuthHash.new(auth_params)
+      @authorization = @user.authorizations.create(provider: auth.provider, uid: auth.uid.to_s)
     end
 
     AuthorizationMailer.send_confirmation_token(@authorization).deliver_now
