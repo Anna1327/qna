@@ -21,6 +21,6 @@ class User < ApplicationRecord
   end
 
   def email_confirmed?(auth)
-    self.authorizations.find_by(uid: auth.uid, provider: auth.provider)&.confirmed?
+    self.authorizations.find_by(uid: auth.uid, provider: auth.provider)&.confirm?
   end
 end

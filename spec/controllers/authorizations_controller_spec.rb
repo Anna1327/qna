@@ -62,7 +62,7 @@ RSpec.describe AuthorizationsController, type: :controller do
 
         it 'accepts token' do
           authorization.reload
-          expect(authorization).to be_confirmed
+          expect(authorization.confirm).to eq(true)
         end
 
         it 'login user' do
