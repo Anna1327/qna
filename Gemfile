@@ -34,10 +34,15 @@ gem 'aws-sdk-s3', require: false
 gem "cocoon"
 gem "gon"
 gem "skim"
+gem "omniauth"
+gem "omniauth-github"
+gem 'omniauth-vkontakte'
+gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'letter_opener'
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails'
 end
@@ -54,6 +59,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'capybara-email'
   gem 'shoulda-matchers'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers

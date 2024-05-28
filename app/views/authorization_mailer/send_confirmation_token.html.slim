@@ -1,0 +1,2 @@
+h3= "To confirm your email follow link below"
+p= link_to 'Confirm email', authorization_email_confirmation_url(authorization_id: @authorization, confirmation_token: @authorization.confirmation_token), method: :get

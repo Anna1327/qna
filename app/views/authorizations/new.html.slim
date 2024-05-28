@@ -1,0 +1,11 @@
+p= 'Send your email to continue'
+= form_with model: @authorization, url: authorizations_path do |f|
+  div
+    = f.label :email
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+
+  = f.hidden_field :uid, value: params['uid']
+  = f.hidden_field :provider, value: params['provider']
+
+  p= f.submit 'Send'
+  
