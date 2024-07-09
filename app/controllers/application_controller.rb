@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  rescue_from CanCan::AccessDenied do |exception|
+  include Pundit
+
+  rescue_from Pundit do |exception|
     redirect_to root_url, alert: exception.message
   end
-
-  check_authorization
 end

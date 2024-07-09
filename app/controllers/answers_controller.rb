@@ -17,6 +17,7 @@ class AnswersController < ApplicationController
   end
 
   def update
+    authorize answer
     answer.update(answer_params) if current_user.author_of?(answer)
   end
 
