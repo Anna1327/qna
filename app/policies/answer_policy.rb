@@ -5,7 +5,19 @@ class AnswerPolicy < ApplicationPolicy
     end
   end
 
+  def create?
+    user.present?
+  end
+
   def update?
-    user.admin? || user.id == record.author.id
+    user&.admin? || user&.author_of?(record)
+  end
+
+  def destroy?
+    user&.admin? || user&.author_of?(record)
+  end
+
+  def best_answer?
+    user&.admin? || user&.author_of?(record&.question)
   end
 end
