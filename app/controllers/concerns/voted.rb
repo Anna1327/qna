@@ -49,6 +49,7 @@ module Voted
 
   def find_votable
     @votable = model_klass.find(params[:id])
+    authorize @votable, :can_vote?, policy_class: VotePolicy
   end
 
   def find_vote

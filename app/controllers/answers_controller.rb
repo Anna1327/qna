@@ -11,16 +11,19 @@ class AnswersController < ApplicationController
   end
 
   def create
+    authorize Answer
     @answer = question.answers.new(answer_params)
     @answer.author = current_user
     @answer.save
   end
 
   def update
+    authorize answer
     answer.update(answer_params) if current_user.author_of?(answer)
   end
 
   def destroy
+    authorize answer
     if current_user.author_of?(answer)
       answer.destroy
       flash[:notice] = t('.success')
@@ -30,6 +33,7 @@ class AnswersController < ApplicationController
   end
 
   def mark_as_the_best
+    authorize answer
     @answer = Answer.find(params[:best_answer])
     @question = Question.find(params[:id])
     @answer.set_best_answer(@question) if current_user.author_of?(@question)

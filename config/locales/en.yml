@@ -30,6 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  pundit:
+    not_unauthorized: "You are not authorized to perform this action on this application"
   main:
     sign_in: "Sign in"
     sign_out: "Sign out"

@@ -4,14 +4,16 @@ class QuestionsController < ApplicationController
   include Voted
 
   before_action :authenticate_user!, except: [:index, :show]
-
+  before_action :question, only: [:show, :edit, :update, :destroy]
   after_action :publish_question, only: [:create]
 
   def index
+    authorize Question
     @questions = Question.all
   end
 
   def show
+    authorize question
     @answer = question.answers.new
     @answer.links.build
     gon.push({
@@ -21,6 +23,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
+    authorize Question
     @question = Question.new
     @question.links.build
     @reward = Reward.new(question: @question)
@@ -30,6 +33,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    authorize Question
     @question = current_user.questions.build(question_params)
     if @question.save
       redirect_to @question, notice: "Your question successfully created."
@@ -39,10 +43,12 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    authorize question
     question.update(question_params) if current_user.author_of?(question)
   end
 
   def destroy
+    authorize question
     if current_user.author_of?(question)
       question.destroy
       redirect_to questions_path

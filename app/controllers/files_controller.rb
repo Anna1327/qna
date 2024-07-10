@@ -4,6 +4,7 @@ class FilesController < ApplicationController
   before_action :authenticate_user!
 
   def destroy
+    authorize file.record, policy_class: FilePolicy
     file.purge if current_user.author_of?(file.record)
   end
 
