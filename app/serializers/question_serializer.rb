@@ -1,9 +1,12 @@
 class QuestionSerializer < ActiveModel::Serializer
-  attributes :id, :title, :body, :created_at, :updated_at, :short_title
-  has_many :answers
+  include Rails.application.routes.url_helpers
+
+  attributes :id, :title, :body, :best_answer_id, :created_at, :updated_at, :files
+  has_many :comments
+  has_many :links
   belongs_to :author, class_name: 'User'
 
-  def short_title
-    object.title.truncate(7)
+  def files
+    object.files.map { |file| rails_blob_path(file, only_path: true) }
   end
 end
