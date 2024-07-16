@@ -2,7 +2,6 @@
 
 class Api::V1::QuestionsController < Api::V1::BaseController
   before_action :find_question, only: %i[show answers update destroy]
-  before_action :current_user, only: %i[create update destroy]
 
   def index
     @questions = Question.all
@@ -19,7 +18,7 @@ class Api::V1::QuestionsController < Api::V1::BaseController
 
   def create
     authorize Question
-    @question = @current_user.questions.build(question_params)
+    @question = current_user.questions.build(question_params)
 
     if @question.save
       render json: @question, serializer: QuestionSerializer
@@ -53,6 +52,6 @@ class Api::V1::QuestionsController < Api::V1::BaseController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, links_attributes: %i[title url])
+    params.require(:question).permit(:title, :body, links_attributes: [:name, :url])
   end
 end
