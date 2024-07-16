@@ -85,7 +85,7 @@ Doorkeeper.configure do
 
   # Authorization Code expiration time (default: 10 minutes).
   #
-  # authorization_code_expires_in 10.minutes
+  authorization_code_expires_in 2.hours
 
   # Access token expiration time (default: 2 hours).
   # If you set this to `nil` Doorkeeper will not expire the token and omit expires_in in response.
@@ -93,7 +93,7 @@ Doorkeeper.configure do
   # Prefer access_token_expires_in 100.years or similar,
   # which would be functionally equivalent and avoid the risk of unexpected behavior by callers.
   #
-  # access_token_expires_in 2.hours
+  access_token_expires_in 24.hours
 
   # Assign custom TTL for access tokens. Will be used instead of access_token_expires_in
   # option if defined. In case the block returns `nil` value Doorkeeper fallbacks to

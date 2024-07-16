@@ -26,6 +26,14 @@ Rails.application.routes.draw do
   resources :links, shallow: true, only: :destroy
   resources :rewards, shallow: true, only: :index
   resources :comments, only: %i[create destroy]
+
+  namespace :api do
+    namespace :v1 do
+      resources :profiles, only: [] do
+        get :me, on: :collection
+      end
+    end
+  end
   
   root to: 'questions#index'
 
