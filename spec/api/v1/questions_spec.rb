@@ -17,6 +17,8 @@ describe 'Questions API', type: :request do
   end
 
   describe "GET /api/v1/questions" do
+    subject { get api_path, params: { access_token: access_token.token }, headers: headers }
+
     let(:api_path) { '/api/v1/questions' }
 
     it_behaves_like 'API Authorizable' do
@@ -30,7 +32,7 @@ describe 'Questions API', type: :request do
       let!(:answers) { create_list(:answer, 3, question: question, author: user) }
 
       before do
-        get api_path, params: { access_token: access_token.token }, headers: headers
+        subject
       end
 
       it "returns 200 status" do

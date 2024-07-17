@@ -6,9 +6,6 @@ class AnswerSerializer < ActiveModel::Serializer
   has_many :links
   belongs_to :question
   belongs_to :author, class_name: 'User'
-
-  def files
-    object.files.map { |file| rails_blob_path(file, only_path: true) }
-  end
 end
+
 

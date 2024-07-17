@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Api::V1::AnswersController < Api::V1::BaseController
+  include Filed
+
   before_action :find_answer, only: %i[show update destroy]
   before_action :find_question, only: :index
 
@@ -37,9 +39,7 @@ class Api::V1::AnswersController < Api::V1::BaseController
   def destroy
     authorize @answer
     if @answer.destroy
-      render json: { status: :ok }
-    else
-      render json: @answer.errors.messages
+      render json: { status: :success }
     end
   end
 

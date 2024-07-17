@@ -162,7 +162,7 @@ describe 'Answers API', type: :request do
     end
   end
 
-  describe "DELETE /api/v1/answer/:id" do
+  describe "DELETE /api/v1/answers/:id" do
     subject { delete api_path, params: { access_token: access_token.token }, headers: headers }
 
     let!(:resource) { create :answer, question: question, author: user }
