@@ -28,7 +28,7 @@ class Api::V1::QuestionsController < Api::V1::BaseController
   end
 
   def update
-    authorize @question, :update?, policy_class: QuestionPolicy
+    authorize @question
     if @question.update(question_params)
       render json: @question, serializer: QuestionSerializer
     else
@@ -37,7 +37,7 @@ class Api::V1::QuestionsController < Api::V1::BaseController
   end
 
   def destroy
-    authorize @question, :destroy?, policy_class: QuestionPolicy
+    authorize @question
     if @question.destroy
       render json: { status: :ok }
     else

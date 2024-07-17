@@ -7,3 +7,4 @@ class QuestionsSerializer < ActiveModel::Serializer
     object.title.truncate(7)
   end
 end
+

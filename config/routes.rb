@@ -31,14 +31,15 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :profiles, only: [] do
         get :me, on: :collection
-        get :all_users, on: :collection
       end
 
-      resources :questions, only: %i[index show create update destroy] do
-        get :answers, on: :member
+      resources :users, only: :index
+
+      resources :questions, except: %i[answers] do
+        resources :answers, only: :index
       end
 
-      resources :answers, only: %i[show create update destroy]
+      resources :answers, except: :index
     end
   end
   

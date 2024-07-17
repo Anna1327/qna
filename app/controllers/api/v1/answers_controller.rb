@@ -2,6 +2,12 @@
 
 class Api::V1::AnswersController < Api::V1::BaseController
   before_action :find_answer, only: %i[show update destroy]
+  before_action :find_question, only: :index
+
+  def index
+    @answers = @question.answers
+    render json: @answers, each_serializer: AnswersSerializer
+  end
 
   def show
     render json: @answer, serializer: AnswerSerializer
@@ -9,7 +15,7 @@ class Api::V1::AnswersController < Api::V1::BaseController
 
   def create
     authorize Answer
-    @answer = Answer.new(answer_params)
+    @answer = current_user.answers.new(answer_params)
     @answer.author = current_user
 
     if @answer.save
@@ -20,7 +26,7 @@ class Api::V1::AnswersController < Api::V1::BaseController
   end
 
   def update
-    authorize @answer, :update?, policy_class: AnswerPolicy
+    authorize @answer
     if @answer.update(answer_params)
       render json: @answer, serializer: AnswerSerializer
     else
@@ -29,7 +35,7 @@ class Api::V1::AnswersController < Api::V1::BaseController
   end
 
   def destroy
-    authorize @answer, :destroy?, policy_class: AnswerPolicy
+    authorize @answer
     if @answer.destroy
       render json: { status: :ok }
     else
@@ -38,6 +44,10 @@ class Api::V1::AnswersController < Api::V1::BaseController
   end
 
   private
+
+  def find_question
+    @question ||= Question.find(params[:question_id])
+  end
 
   def find_answer
     @answer = Answer.find(params[:id])

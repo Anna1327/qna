@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ApiHelpers
-  def json
+  def response_json
     @json ||= JSON.parse(response.body)
   end
 
