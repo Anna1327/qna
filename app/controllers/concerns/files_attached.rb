@@ -1,4 +1,4 @@
-module Filed
+module FilesAttached
   extend ActiveSupport::Concern
 
   def files

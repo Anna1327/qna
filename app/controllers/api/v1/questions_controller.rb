@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::QuestionsController < Api::V1::BaseController
-  include Filed
+  include FilesAttached
 
   before_action :find_question, only: %i[show answers update destroy]
 
