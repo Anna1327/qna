@@ -1,2 +1,3 @@
 h3= t('mailers.daily_digest.title')
-  p = link_to @questions.title, @questions
+- @questions.each do |question|
+  p = link_to question.title, question
