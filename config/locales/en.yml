@@ -32,6 +32,11 @@
 en:
   pundit:
     not_unauthorized: "You are not authorized to perform this action on this application"
+
+  mailers:
+    daily_digest:
+      title: "Summary of questions from yesterday:"
+
   main:
     sign_in: "Sign in"
     sign_out: "Sign out"
