@@ -14,6 +14,7 @@ class QuestionsController < ApplicationController
 
   def show
     authorize question
+    @subscriber = Subscriber.find_by(author: current_user, question: question)
     @answer = question.answers.new
     @answer.links.build
     gon.push({
@@ -36,6 +37,7 @@ class QuestionsController < ApplicationController
     authorize Question
     @question = current_user.questions.build(question_params)
     if @question.save
+      @question.subscribers.create(author: current_user)
       redirect_to @question, notice: "Your question successfully created."
     else
       render :new

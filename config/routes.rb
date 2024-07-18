@@ -26,12 +26,14 @@ Rails.application.routes.draw do
         patch :mark_as_the_best
       end
     end
+    resources :subscribers, only: :create
   end
 
   resources :files, shallow: true, only: :destroy
   resources :links, shallow: true, only: :destroy
   resources :rewards, shallow: true, only: :index
   resources :comments, only: %i[create destroy]
+  resources :subscribers, only: :destroy
 
   namespace :api do
     namespace :v1 do

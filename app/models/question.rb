@@ -6,6 +6,7 @@ class Question < ApplicationRecord
   include Commentable
 
   has_many :answers, dependent: :destroy
+  has_many :subscribers, dependent: :destroy
 
   belongs_to :author, class_name: 'User'
   belongs_to :best_answer, class_name: 'Answer', optional: true

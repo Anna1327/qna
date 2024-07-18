@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_10_221105) do
+ActiveRecord::Schema.define(version: 2024_07_18_060509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,15 @@ ActiveRecord::Schema.define(version: 2024_07_10_221105) do
     t.index ["question_id"], name: "index_rewards_on_question_id"
   end
 
+  create_table "subscribers", force: :cascade do |t|
+    t.bigint "question_id"
+    t.bigint "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_subscribers_on_author_id"
+    t.index ["question_id"], name: "index_subscribers_on_question_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -186,5 +195,7 @@ ActiveRecord::Schema.define(version: 2024_07_10_221105) do
   add_foreign_key "questions", "users", column: "author_id"
   add_foreign_key "rewards", "answers"
   add_foreign_key "rewards", "questions"
+  add_foreign_key "subscribers", "questions"
+  add_foreign_key "subscribers", "users", column: "author_id"
   add_foreign_key "votes", "users", column: "author_id"
 end

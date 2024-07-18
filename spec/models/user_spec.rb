@@ -4,6 +4,8 @@ RSpec.describe User, type: :model do
   it { should have_many(:authorizations).dependent(:destroy) }
   it { should have_many(:questions).dependent(:destroy) }
   it { should have_many(:answers).dependent(:destroy) }
+  it { should have_many(:subscribers).dependent(:destroy) }
+
   it { should have_many(:rewards) }
   it { should have_many(:votes).class_name('Vote') }
   it { should have_many(:comments).class_name('Comment') }

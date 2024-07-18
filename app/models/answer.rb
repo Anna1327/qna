@@ -18,4 +18,10 @@ class Answer < ApplicationRecord
     question.update(best_answer_id: self.id)
     question.reward&.update(answer: self)
   end
+
+  private
+
+  def subscriber_notification
+    NotificationJob.perform_later(self)
+  end
 end

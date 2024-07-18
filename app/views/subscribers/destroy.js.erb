@@ -1,0 +1,7 @@
+document
+    .querySelector('.answer_errors')
+    .innerHTML = '<%= render 'shared/errors', resource: @subscriber %>'
+
+<% unless @subscriber.persisted? %>
+  document.querySelector('.follow').innerHTML = '<%= j render 'shared/subscriber' %>';
+<% end %>

@@ -62,6 +62,8 @@ en:
       edit: "Edit question"
       delete_answer: "Delete answer"
       edit_answer: "Edit answer"
+      subscribe: "Subscribe"
+      unsubscribe: "Unsubscribe"
     new:
       ask: "Ask"
     create:
