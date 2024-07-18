@@ -39,6 +39,9 @@ gem "omniauth-github"
 gem 'omniauth-vkontakte'
 gem "omniauth-rails_csrf_protection"
 gem "pundit"
+gem "doorkeeper"
+gem "active_model_serializers", '~> 0.10'
+gem "oj"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

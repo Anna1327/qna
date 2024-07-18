@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   get 'comments/new'
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks'} 
  
@@ -25,6 +26,22 @@ Rails.application.routes.draw do
   resources :links, shallow: true, only: :destroy
   resources :rewards, shallow: true, only: :index
   resources :comments, only: %i[create destroy]
+
+  namespace :api do
+    namespace :v1 do
+      resources :profiles, only: [] do
+        get :me, on: :collection
+      end
+
+      resources :users, only: :index
+
+      resources :questions, except: %i[answers] do
+        resources :answers, only: :index
+      end
+
+      resources :answers, except: :index
+    end
+  end
   
   root to: 'questions#index'
 
