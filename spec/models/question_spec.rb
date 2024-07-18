@@ -18,4 +18,15 @@ RSpec.describe Question, type: :model do
   it 'have many attached file' do
     expect(Question.new.files).to be_an_instance_of(ActiveStorage::Attached::Many)
   end
+
+  describe 'reputation' do
+    let(:question) { build(:question) }
+
+    it 'calls ReputationJobs' do
+      allow(ReputationJob).to receive(:perform_later)
+      ReputationJob.perform_later(question)
+      expect(ReputationJob).to have_received(:perform_later).with(question)
+      question.save!
+    end
+  end
 end

@@ -15,4 +15,12 @@ class Question < ApplicationRecord
   def other_answers
     answers.where.not(id: best_answer_id)
   end
+
+  after_create :calculate_reputation
+
+  private
+
+  def calculate_reputation
+    ReputationJob.perform_now(self)
+  end
 end
