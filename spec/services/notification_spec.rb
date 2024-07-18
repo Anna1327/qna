@@ -8,12 +8,12 @@ RSpec.describe Notification do
   let(:subscriber) { create :subscriber, author: user, question: question }
   let(:answer) { create :answer, question: question, author: user }
 
-  it "sends notification to subscriber" do
+  it 'sends notification to subscriber' do
     expect(SubscriberNotificationMailer).to receive(:send_notification).with(answer).and_call_original
     subject.send_notification(answer)
   end
 
-  it "does not send notification to not subscriber" do
+  it 'does not send notification to not subscriber' do
     answer = create :answer, question: question, author: user
 
     expect(SubscriberNotificationMailer).not_to receive(:send_notification).with(answer).and_call_original

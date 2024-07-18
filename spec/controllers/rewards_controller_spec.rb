@@ -30,5 +30,4 @@ RSpec.describe RewardsController, type: :controller do
       end
     end
   end
-
 end

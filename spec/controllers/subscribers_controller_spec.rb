@@ -85,7 +85,7 @@ RSpec.describe SubscribersController, type: :controller do
         let!(:subscriber) { create :subscriber, question: question }
 
         it 'does not deletes others following' do
-          expect do 
+          expect do
             delete :destroy, params: { id: subscriber }, format: :js
           end.not_to change(question.subscribers, :count)
         end

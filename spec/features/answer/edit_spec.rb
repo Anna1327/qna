@@ -2,25 +2,24 @@
 
 require 'rails_helper'
 
-feature 'User can edit his answer', %q{
+feature 'User can edit his answer', "
   In order to correct mistakes
   As an author of answer
   I'd like to be able to edit my answer
-} do
-
+" do
   given(:user) { create(:user) }
   given(:question) { create :question, author: user }
   given!(:answer) { create :answer, question: question, author: user }
   given(:thinknetica_url) { 'https://thinknetica.com/' }
 
-  describe "Authenticated user", js: true do
+  describe 'Authenticated user', js: true do
     background do
       sign_in(user)
       visit question_path(question)
       click_on I18n.t('questions.show.edit_answer')
     end
 
-    scenario "edits his answer" do
+    scenario 'edits his answer' do
       within ".answers form#edit-answer-#{answer.id}" do
         fill_in 'Body', with: 'Updated answer'
         click_button I18n.t('answers.edit.update')
@@ -31,28 +30,28 @@ feature 'User can edit his answer', %q{
       end
     end
 
-    scenario "edits his answer with errors" do
+    scenario 'edits his answer with errors' do
       within ".answers form#edit-answer-#{answer.id}" do
-        fill_in 'answer_body', with: ""
+        fill_in 'answer_body', with: ''
         click_button I18n.t('answers.edit.update')
       end
-      within ".answers" do
+      within '.answers' do
         expect(page).to have_content "Body can't be blank"
       end
     end
 
-    scenario "can to add files when edits his answer" do
+    scenario 'can to add files when edits his answer' do
       within ".answers form#edit-answer-#{answer.id}" do
         attach_file 'answer_files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
         click_button I18n.t('answers.edit.update')
       end
-      within ".answers" do
+      within '.answers' do
         expect(page).to have_link 'rails_helper.rb'
         expect(page).to have_link 'spec_helper.rb'
       end
     end
 
-    scenario "can delete files when edits his answer" do
+    scenario 'can delete files when edits his answer' do
       within ".answers li#answer-#{answer.id}" do
         attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
         click_on I18n.t('answers.edit.update')
@@ -64,7 +63,7 @@ feature 'User can edit his answer', %q{
     end
 
     scenario 'can add links when edit his answer' do
-      google_url = "https://www.google.ru/"
+      google_url = 'https://www.google.ru/'
 
       within ".answers li#answer-#{answer.id}" do
         click_on I18n.t('answers.edit.update')
@@ -99,13 +98,13 @@ feature 'User can edit his answer', %q{
           fill_in 'Url', with: thinknetica_url
         end
 
-        find(".nested-fields").first(:link, 'Remove link').click
+        find('.nested-fields').first(:link, 'Remove link').click
         expect(page).not_to have_link 'Thinknetica'
       end
     end
   end
 
-  describe "Authenticated other user", js: true do
+  describe 'Authenticated other user', js: true do
     given(:other_user) { create(:user) }
 
     scenario "tries to edit other user's answer" do
@@ -116,8 +115,8 @@ feature 'User can edit his answer', %q{
     end
   end
 
-  describe "Unauthenticated user" do
-    scenario "can not edit answer" do
+  describe 'Unauthenticated user' do
+    scenario 'can not edit answer' do
       visit questions_path
 
       expect(page).not_to have_link I18n.t('questions.show.edit_answer')

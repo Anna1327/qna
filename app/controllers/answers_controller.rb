@@ -3,12 +3,11 @@
 class AnswersController < ApplicationController
   include Voted
 
-  before_action :authenticate_user!, only: [:create, :update, :destroy, :mark_as_the_best]
+  before_action :authenticate_user!, only: %i[create update destroy mark_as_the_best]
 
   after_action :publish_answer, only: [:create]
 
-  def new
-  end
+  def new; end
 
   def create
     authorize Answer
@@ -45,9 +44,9 @@ class AnswersController < ApplicationController
     return if @answer.errors.any?
 
     gon.push({
-      answer_owner: answer.author.id,
-      question_owner: @question.author.id
-    })
+               answer_owner: answer.author.id,
+               question_owner: @question.author.id
+             })
 
     ActionCable.server.broadcast(
       "question_#{@answer.question.id}_answers",
@@ -70,6 +69,6 @@ class AnswersController < ApplicationController
   helper_method :question, :answer
 
   def answer_params
-    params.require(:answer).permit(:body, :correct, files: [], links_attributes: [:name, :url])
+    params.require(:answer).permit(:body, :correct, files: [], links_attributes: %i[name url])
   end
 end

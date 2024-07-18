@@ -12,7 +12,7 @@ RSpec.describe VotePolicy, type: :policy do
     it 'grants access if user is not author of votable' do
       expect(subject).to permit(user, other_votable)
     end
-    
+
     it 'denies access if user is not present' do
       expect(subject).not_to permit(nil, votable)
     end

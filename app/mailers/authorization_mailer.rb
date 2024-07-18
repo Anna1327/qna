@@ -3,7 +3,7 @@ class AuthorizationMailer < ApplicationMailer
     @authorization = authorization
     mail(
       to: authorization.user.email,
-      subject: "Confirm your email"
+      subject: 'Confirm your email'
     )
   end
 end

@@ -57,7 +57,8 @@ RSpec.describe AuthorizationsController, type: :controller do
         before do
           get :email_confirmation, params: {
             authorization_id: authorization,
-            confirmation_token: authorization.confirmation_token }
+            confirmation_token: authorization.confirmation_token
+          }
         end
 
         it 'accepts token' do

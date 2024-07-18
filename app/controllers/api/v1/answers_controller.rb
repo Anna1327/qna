@@ -38,9 +38,9 @@ class Api::V1::AnswersController < Api::V1::BaseController
 
   def destroy
     authorize @answer
-    if @answer.destroy
-      render json: { status: :success }
-    end
+    return unless @answer.destroy
+
+    render json: { status: :success }
   end
 
   private
@@ -54,6 +54,6 @@ class Api::V1::AnswersController < Api::V1::BaseController
   end
 
   def answer_params
-    params.require(:answer).permit(:question_id, :body, links_attributes: [:name, :url])
+    params.require(:answer).permit(:question_id, :body, links_attributes: %i[name url])
   end
 end

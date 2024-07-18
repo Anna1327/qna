@@ -2,6 +2,6 @@
 
 module ApiHeaderHelpers
   def headers
-    { "ACCEPT" => 'application/json' }
+    { 'ACCEPT' => 'application/json' }
   end
 end

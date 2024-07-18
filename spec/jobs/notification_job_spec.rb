@@ -12,7 +12,7 @@ RSpec.describe NotificationJob, type: :job do
     allow(Notification).to receive(:new).and_return(service)
   end
 
-  it "calls Services::Notification#send_notification" do
+  it 'calls Services::Notification#send_notification' do
     expect(service).to receive(:send_notification).with(answer)
     described_class.perform_now(answer)
   end

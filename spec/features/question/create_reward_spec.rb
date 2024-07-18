@@ -2,12 +2,11 @@
 
 require 'rails_helper'
 
-feature 'User can add reward to question', %q{
+feature 'User can add reward to question', "
   In order to reward users for best answer
   As an question's author
   I'd like to be able to create reward for best answer
-} do
-
+" do
   given(:user) { create :user }
   given(:image) { Rails.root.join('app', 'assets', 'images', 'badge.png') }
 
@@ -41,7 +40,7 @@ feature 'User can add reward to question', %q{
 
         scenario 'with another file instead image' do
           click_on I18n.t('questions.new.ask')
-  
+
           expect(page).to have_content I18n.t('rewards.errors.only_image')
         end
       end

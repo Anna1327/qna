@@ -2,12 +2,11 @@
 
 require 'rails_helper'
 
-feature 'User can vote question', %q{
+feature 'User can vote question', "
   In order to rate question
   As an authenticated author
   I'd like to be able to vote other's question
-} do
-
+" do
   given(:user) { create :user }
   given!(:other_user) { create :user }
   given!(:question) { create :question, author: other_user }
@@ -17,7 +16,7 @@ feature 'User can vote question', %q{
       sign_in(user)
     end
 
-    context "is author of question" do
+    context 'is author of question' do
       background do
         question = create :question, author: user
         visit question_path(question)
@@ -30,12 +29,12 @@ feature 'User can vote question', %q{
       end
     end
 
-    context "is not author of question" do
+    context 'is not author of question' do
       background do
         visit question_path(question)
       end
 
-      scenario "can liked question" do
+      scenario 'can liked question' do
         within '.question' do
           expect(page.find('.count')).to have_content '0'
           click_on 'Like'
@@ -43,7 +42,7 @@ feature 'User can vote question', %q{
         end
       end
 
-      scenario "can disliked question" do
+      scenario 'can disliked question' do
         within '.question' do
           expect(page.find('.count')).to have_content '0'
           click_on 'Dislike'
@@ -51,7 +50,7 @@ feature 'User can vote question', %q{
         end
       end
 
-      scenario "can to cancel like of question" do
+      scenario 'can to cancel like of question' do
         within '.question' do
           expect(page.find('.count')).to have_content '0'
           click_on 'Like'
@@ -61,7 +60,7 @@ feature 'User can vote question', %q{
         end
       end
 
-      scenario "can to cancel dislike of question" do
+      scenario 'can to cancel dislike of question' do
         within '.question' do
           expect(page.find('.count')).to have_content '0'
           click_on 'Dislike'
@@ -91,7 +90,7 @@ feature 'User can vote question', %q{
     end
   end
 
-  describe "Unauthenticated user", js: true do
+  describe 'Unauthenticated user', js: true do
     background do
       visit question_path(question)
     end

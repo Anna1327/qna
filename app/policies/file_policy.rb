@@ -4,7 +4,7 @@ class FilePolicy < ApplicationPolicy
       scope.all
     end
   end
-  
+
   def destroy?
     user&.author_of?(record)
   end

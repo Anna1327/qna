@@ -2,12 +2,11 @@
 
 require 'rails_helper'
 
-feature 'User can to mark answer as the best for his question', %q{
+feature 'User can to mark answer as the best for his question', "
   In order to choose best answer for my question
   As an author of question
   I'd like to be able to mark answer as the best
-} do
-
+" do
   given!(:user) { create :user }
   given!(:question) { create :question, author: user }
   given!(:answers) { create_list :answer, 3, question: question, author: user }
@@ -41,7 +40,7 @@ feature 'User can to mark answer as the best for his question', %q{
       expect(page).to have_selector("#answer-#{new_best_answer.id}.best_answer")
     end
 
-    scenario "best answer on the top" do
+    scenario 'best answer on the top' do
       within ".answers li#answer-#{best_answer.id}" do
         click_on I18n.t('answers.mark_as_the_best.submit')
       end

@@ -7,5 +7,3 @@ class AnswerSerializer < ActiveModel::Serializer
   belongs_to :question
   belongs_to :author, class_name: 'User'
 end
-
-

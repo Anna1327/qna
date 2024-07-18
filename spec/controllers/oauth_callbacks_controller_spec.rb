@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe OauthCallbacksController, type: :controller do
   before do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @request.env['devise.mapping'] = Devise.mappings[:user]
     allow(request.env).to receive(:[]).and_call_original
-    allow(request.env).to receive(:[]).with("omniauth.auth").and_return(oauth_data)
+    allow(request.env).to receive(:[]).with('omniauth.auth').and_return(oauth_data)
   end
 
   describe 'Github' do
@@ -14,7 +14,7 @@ RSpec.describe OauthCallbacksController, type: :controller do
 
     it 'finds user from oauth data' do
       expect(User).to receive(:find_for_oauth).with(oauth_data)
-      get :github 
+      get :github
     end
 
     context 'user exists' do
@@ -37,14 +37,13 @@ RSpec.describe OauthCallbacksController, type: :controller do
     context 'user does not exists' do
       before do
         allow(User).to receive(:find_for_oauth)
-        get :github 
+        get :github
       end
 
       it 'redirects to root path' do
         expect(response).to redirect_to root_path
       end
-  
-  
+
       it 'does not login user' do
         expect(subject.current_user).to_not be
       end

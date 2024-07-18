@@ -2,12 +2,11 @@
 
 require 'rails_helper'
 
-feature 'User can add links to answer', %q{
+feature 'User can add links to answer', "
   In order to provide additional info to my answer
   As an answer's author
   I'd like to be able to add links
-} do
-
+" do
   given(:user) { create :user }
   given(:gist_url) { 'https://gist.github.com/Anna1327/176c70dc13cd0fd5688fc4da127416c5' }
   given(:question) { create :question, author: user }
@@ -23,13 +22,13 @@ feature 'User can add links to answer', %q{
       background do
         within '.answers' do
           click_on I18n.t('links.new.add_link')
-  
+
           fill_in 'Link name', with: 'My gist'
           fill_in 'Url', with: gist_url
         end
       end
 
-      scenario 'User can add link when give an answer' do  
+      scenario 'User can add link when give an answer' do
         within '.answers' do
           click_on I18n.t('answers.create.submit')
           expect(page).to have_link 'My gist', href: gist_url

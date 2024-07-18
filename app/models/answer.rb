@@ -15,7 +15,7 @@ class Answer < ApplicationRecord
   end
 
   def set_best_answer(question)
-    question.update(best_answer_id: self.id)
+    question.update(best_answer_id: id)
     question.reward&.update(answer: self)
   end
 

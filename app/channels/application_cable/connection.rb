@@ -4,7 +4,6 @@ module ApplicationCable
       # reject_unauthorized_connection if cookies[:secret] != '123'
     end
 
-    def disconnect
-    end
+    def disconnect; end
   end
 end

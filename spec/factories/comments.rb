@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :comment do
-    body { "Body of the comment" }
+    body { 'Body of the comment' }
     commentable { nil }
     author { create :user }
 
