@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for 'API nestable links' do
   describe 'when check links' do
     it 'returns list of comments' do

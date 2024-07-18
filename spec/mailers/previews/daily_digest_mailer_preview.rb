@@ -1,3 +1,4 @@
-# Preview all emails at http://localhost:3000/rails/mailers/daily_digest
+# frozen_string_literal: true
+
 class DailyDigestMailerPreview < ActionMailer::Preview
 end

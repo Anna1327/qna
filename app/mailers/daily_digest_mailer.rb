@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DailyDigestMailer < ApplicationMailer
   attr_reader :question
 
