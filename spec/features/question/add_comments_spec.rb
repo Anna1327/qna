@@ -24,15 +24,15 @@ feature 'User can comment question', "
 
       Capybara.using_session('user') do
         within '.question' do
-          fill_in "Comment body", with: "Body of the comment"
+          fill_in 'Comment body', with: 'Body of the comment'
           click_on 'Add comment'
-          expect(page).to have_content "Body of the comment"
+          expect(page).to have_content 'Body of the comment'
         end
       end
 
       Capybara.using_session('guest') do
         within '.question' do
-          expect(page).to have_content "Body of the comment"
+          expect(page).to have_content 'Body of the comment'
         end
       end
     end

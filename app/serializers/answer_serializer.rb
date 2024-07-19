@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnswerSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
@@ -7,5 +9,3 @@ class AnswerSerializer < ActiveModel::Serializer
   belongs_to :question
   belongs_to :author, class_name: 'User'
 end
-
-

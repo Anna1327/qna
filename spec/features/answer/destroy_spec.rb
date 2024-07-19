@@ -2,22 +2,21 @@
 
 require 'rails_helper'
 
-feature 'User can destroy answer', %q{
+feature 'User can destroy answer', "
   In order to destroy wrong answer
   As an authenticated user
   I'd like to be able to destroy my own answer
-} do
-
+" do
   given(:user) { create(:user) }
   given(:question) { create :question, author: user }
   given(:answer) { create_list :answer, 3, question: question, author: user }
 
   describe 'Authenticated user', js: true do
-    background do 
+    background do
       sign_in(user)
     end
 
-    scenario "can destroy his own answer" do
+    scenario 'can destroy his own answer' do
       question = create :question, author: user
       answer = create :answer, question: question, author: user
 
@@ -38,7 +37,6 @@ feature 'User can destroy answer', %q{
       visit question_path(others_question)
 
       expect(page).not_to have_link I18n.t('questions.show.delete_answer')
-      
     end
   end
 
@@ -46,9 +44,9 @@ feature 'User can destroy answer', %q{
     scenario "can't destroy an answer" do
       question = create :question, author: user
       create :answer, question: question, author: user
-  
+
       visit question_path(question)
-  
+
       expect(page).not_to have_content I18n.t('questions.show.delete_answer')
     end
   end

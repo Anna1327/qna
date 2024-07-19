@@ -9,7 +9,7 @@ class AuthorizationsController < ApplicationController
 
   def create
     unless @user
-      password = Devise.friendly_token[0,20]
+      password = Devise.friendly_token[0, 20]
       @user = User.create!(email: params[:email], password: password, password_confirmation: password)
     end
 

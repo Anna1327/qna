@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Authorization < ApplicationRecord
   after_commit :set_token, on: :create
 

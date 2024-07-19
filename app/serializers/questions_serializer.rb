@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuestionsSerializer < ActiveModel::Serializer
   attributes :id, :title, :body, :created_at, :updated_at, :short_title
   has_many :answers, serializer: AnswersSerializer
@@ -7,4 +9,3 @@ class QuestionsSerializer < ActiveModel::Serializer
     object.title.truncate(7)
   end
 end
-

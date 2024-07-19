@@ -2,12 +2,11 @@
 
 require 'rails_helper'
 
-feature 'User can vote for answer', %q{
+feature 'User can vote for answer', "
   In order to rate answer
   As an authenticated author
   I'd like to be able to vote other's answer
-} do
-
+" do
   given(:user) { create :user }
   given!(:other_user) { create :user }
   given!(:question) { create :question, author: other_user }
@@ -18,7 +17,7 @@ feature 'User can vote for answer', %q{
       sign_in(user)
     end
 
-    context "is author of answer" do
+    context 'is author of answer' do
       background do
         question = create :question, author: user
         create :answer, question: question, author: user
@@ -33,12 +32,12 @@ feature 'User can vote for answer', %q{
       end
     end
 
-    context "is not author of answer" do
+    context 'is not author of answer' do
       background do
         visit question_path(question)
       end
 
-      scenario "can liked answer" do
+      scenario 'can liked answer' do
         within '.answers' do
           expect(page.find('.count')).to have_content '0'
           click_on 'Like'
@@ -46,7 +45,7 @@ feature 'User can vote for answer', %q{
         end
       end
 
-      scenario "can disliked question" do
+      scenario 'can disliked question' do
         within '.answers' do
           expect(page.find('.count')).to have_content '0'
           click_on 'Dislike'
@@ -54,7 +53,7 @@ feature 'User can vote for answer', %q{
         end
       end
 
-      scenario "can to cancel like of answer" do
+      scenario 'can to cancel like of answer' do
         within '.answers' do
           expect(page.find('.count')).to have_content '0'
           click_on 'Like'
@@ -64,7 +63,7 @@ feature 'User can vote for answer', %q{
         end
       end
 
-      scenario "can to cancel dislike of answer" do
+      scenario 'can to cancel dislike of answer' do
         within '.answers' do
           expect(page.find('.count')).to have_content '0'
           click_on 'Dislike'
@@ -104,7 +103,7 @@ feature 'User can vote for answer', %q{
     scenario "couldn't vote answer" do
       within '.answers' do
         expect(page).to have_link('Like', class: 'disabled')
-          expect(page).to have_link('Dislike', class: 'disabled')
+        expect(page).to have_link('Dislike', class: 'disabled')
       end
     end
   end

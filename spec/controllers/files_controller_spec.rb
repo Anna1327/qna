@@ -14,17 +14,17 @@ RSpec.describe FilesController, type: :controller do
         let!(:question) { create :question, author: user, files: [file] }
 
         it "deletes question's file" do
-          expect do 
-            delete :destroy, 
-              params: { id: question.files.first }, 
-              format: :js
+          expect do
+            delete :destroy,
+                   params: { id: question.files.first },
+                   format: :js
           end.to change(question.files, :count).by(-1)
         end
 
         it 'renders to show question' do
-          delete :destroy, 
-            params: { id: question.files.first }, 
-            format: :js
+          delete :destroy,
+                 params: { id: question.files.first },
+                 format: :js
           expect(response).to redirect_to assigns(:question)
         end
       end
@@ -37,16 +37,16 @@ RSpec.describe FilesController, type: :controller do
           other_question.files.attach(file)
 
           expect do
-            delete :destroy, 
-              params: { id: other_question.files.first }, 
-              format: :js
+            delete :destroy,
+                   params: { id: other_question.files.first },
+                   format: :js
           end.not_to change(other_question.files, :count)
         end
 
         it 'renders to show question' do
-          delete :destroy, 
-            params: { id: other_question.files.first }, 
-            format: :js
+          delete :destroy,
+                 params: { id: other_question.files.first },
+                 format: :js
           expect(response).to redirect_to assigns(:question)
         end
       end
@@ -57,16 +57,16 @@ RSpec.describe FilesController, type: :controller do
 
       it "can't delete question's file" do
         expect do
-          delete :destroy, 
-            params: { id: question.files.first },
-            format: :js
+          delete :destroy,
+                 params: { id: question.files.first },
+                 format: :js
         end.not_to change(question.files, :count)
       end
 
       it 'renders destroy' do
-        delete :destroy, 
-          params: { id: question.files.first }, 
-          format: :js
+        delete :destroy,
+               params: { id: question.files.first },
+               format: :js
         expect(response).to have_http_status(:unauthorized)
       end
     end

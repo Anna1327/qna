@@ -54,6 +54,6 @@ class Api::V1::QuestionsController < Api::V1::BaseController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, links_attributes: [:name, :url])
+    params.require(:question).permit(:title, :body, links_attributes: %i[name url])
   end
 end

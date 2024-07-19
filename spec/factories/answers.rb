@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :answer do
-    body { "Body of the answer" }
+    body { 'Body of the answer' }
     correct { false }
     question
 

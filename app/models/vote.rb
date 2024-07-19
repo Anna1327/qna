@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Vote < ApplicationRecord
   belongs_to :author, class_name: 'User'
   belongs_to :votable, polymorphic: true
@@ -6,11 +8,11 @@ class Vote < ApplicationRecord
   validate :validation_by_author
 
   def liked
-    self.destroy if self.value == -1
+    destroy if value == -1
   end
 
   def disliked
-    self.destroy if self.value == 1
+    destroy if value == 1
   end
 
   def validation_by_author

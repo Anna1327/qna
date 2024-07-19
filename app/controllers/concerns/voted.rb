@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Voted
   extend ActiveSupport::Concern
 
@@ -72,8 +74,8 @@ module Voted
   def render_errors
     respond_to do |format|
       format.json do
-        render json: @votable.errors.full_messages, 
-          status: :unprocessable_entity
+        render json: @votable.errors.full_messages,
+               status: :unprocessable_entity
       end
     end
   end

@@ -2,12 +2,11 @@
 
 require 'rails_helper'
 
-feature 'User can add links to question', %q{
+feature 'User can add links to question', "
   In order to provide additional info to my question
   As an question's author
   I'd like to be able to add links
-} do
-
+" do
   given(:user) { create :user }
 
   describe 'Authenticated user', js: true do
@@ -56,7 +55,7 @@ feature 'User can add links to question', %q{
           fill_in 'Url', with: 'url'
           click_on I18n.t('questions.new.ask')
         end
-  
+
         scenario 'with invalid url' do
           expect(page).not_to have_link 'My gist', href: 'url'
           expect(page).to have_content 'Links url is invalid'

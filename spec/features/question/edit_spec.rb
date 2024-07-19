@@ -2,12 +2,11 @@
 
 require 'rails_helper'
 
-feature 'Authenticated user can edit his question', %q{
+feature 'Authenticated user can edit his question', "
   In order to correct the question
   As an author of question
   I'd like to be able to edit my question
-  } do
-
+  " do
   given!(:user) { create :user }
   given!(:question) { create :question, author: user }
   given(:thinknetica_url) { 'https://thinknetica.com/' }
@@ -97,7 +96,7 @@ feature 'Authenticated user can edit his question', %q{
           fill_in 'Url', with: thinknetica_url
         end
 
-        find(".nested-fields").first(:link, 'Remove link').click
+        find('.nested-fields').first(:link, 'Remove link').click
         expect(page).not_to have_link 'Thinknetica'
       end
     end
@@ -119,7 +118,7 @@ feature 'Authenticated user can edit his question', %q{
   describe 'Unauthenticated user', js: true do
     scenario 'can not edit answer' do
       visit question_path(question)
-  
+
       expect(page).not_to have_link I18n.t('questions.edit.update')
     end
   end

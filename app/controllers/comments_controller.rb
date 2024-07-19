@@ -67,7 +67,7 @@ class CommentsController < ApplicationController
     return if @comment.errors.any?
 
     ActionCable.server.broadcast(
-      "question_#{@comment.commentable_id}_comment", 
+      "question_#{@comment.commentable_id}_comment",
       {
         action: 'create',
         comment: @comment.as_json,
@@ -80,7 +80,7 @@ class CommentsController < ApplicationController
     return if @comment.errors.any?
 
     ActionCable.server.broadcast(
-      "question_#{@comment.commentable_id}_comment", 
+      "question_#{@comment.commentable_id}_comment",
       {
         action: 'delete',
         comment_id: @comment_id

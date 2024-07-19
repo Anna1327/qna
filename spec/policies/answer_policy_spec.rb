@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe AnswerPolicy, type: :policy do
@@ -15,15 +17,15 @@ RSpec.describe AnswerPolicy, type: :policy do
   end
 
   permissions :update?, :destroy? do
-    it "grants access if user is admin" do
+    it 'grants access if user is admin' do
       expect(subject).to permit(admin, create(:answer, question: question, author: admin))
     end
 
-    it "grants access if user is author" do
+    it 'grants access if user is author' do
       expect(subject).to permit(user, answer)
     end
 
-    it "denies access if user is not author" do
+    it 'denies access if user is not author' do
       expect(subject).not_to permit(user, create(:answer, question: question, author: admin))
     end
   end
@@ -32,7 +34,7 @@ RSpec.describe AnswerPolicy, type: :policy do
     let(:other_user) { create :user }
     let(:other_answer) { create :answer, question: question, author: other_user }
 
-    it "grants access if user is admin" do
+    it 'grants access if user is admin' do
       expect(subject).to permit(admin, answer)
     end
 

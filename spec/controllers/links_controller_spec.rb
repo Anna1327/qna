@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe LinksController, type: :controller do
-
   let!(:user) { create :user }
   let!(:question) { create :question, author: user }
   let!(:link) { create :link, linkable: question }
@@ -15,17 +14,17 @@ RSpec.describe LinksController, type: :controller do
       context 'question' do
         context 'user is author of question' do
           it "deletes question's link" do
-            expect do 
-              delete :destroy, 
-                params: { id: question.links.first }, 
-                format: :js
+            expect do
+              delete :destroy,
+                     params: { id: question.links.first },
+                     format: :js
             end.to change(question.links, :count).by(-1)
           end
 
           it 'renders destroy' do
-            delete :destroy, 
-              params: { id: question.links.first }, 
-              format: :js
+            delete :destroy,
+                   params: { id: question.links.first },
+                   format: :js
             expect(response).to render_template :destroy
           end
         end
@@ -37,16 +36,16 @@ RSpec.describe LinksController, type: :controller do
 
           it "can't delete question's link" do
             expect do
-              delete :destroy, 
-                params: { id: other_question.links.first }, 
-                format: :js
+              delete :destroy,
+                     params: { id: other_question.links.first },
+                     format: :js
             end.not_to change(other_question.links, :count)
           end
 
           it 'renders destroy' do
-            delete :destroy, 
-              params: { id: other_question.links.first }, 
-              format: :js
+            delete :destroy,
+                   params: { id: other_question.links.first },
+                   format: :js
             expect(response).to render_template :destroy
           end
         end
@@ -57,16 +56,16 @@ RSpec.describe LinksController, type: :controller do
       context 'question' do
         it "can't delete question's link" do
           expect do
-            delete :destroy, 
-              params: { id: question.links.first },
-              format: :js
+            delete :destroy,
+                   params: { id: question.links.first },
+                   format: :js
           end.not_to change(question.links, :count)
         end
 
         it 'renders destroy' do
-          delete :destroy, 
-            params: { id: question.links.first }, 
-            format: :js
+          delete :destroy,
+                 params: { id: question.links.first },
+                 format: :js
           expect(response).to have_http_status(:unauthorized)
         end
       end
