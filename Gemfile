@@ -76,6 +76,7 @@ group :test do
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'webdrivers'
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -115,6 +115,12 @@ GEM
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
+    database_cleaner (2.0.2)
+      database_cleaner-active_record (>= 2, < 3)
+    database_cleaner-active_record (2.2.0)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.3.4)
     devise (4.9.3)
       bcrypt (~> 3.0)
@@ -437,6 +443,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   capybara-email
   cocoon
+  database_cleaner
   devise
   doorkeeper
   factory_bot_rails

@@ -1,0 +1,25 @@
+.search-container
+  = form_with url: "/search", method: :get, remote: :true do |form|
+
+    = form.label :query, "Search for:"
+    = form.text_field :query
+    = form.submit "Search"
+
+    p
+
+    = form.radio_button :scope, "all"
+    = form.label :scope_all, "All"
+
+    = form.radio_button :scope, "question"
+    = form.label :scope_question, "Question"
+
+    = form.radio_button :scope, "answer"
+    = form.label :scope_answer, "Answer"
+
+    = form.radio_button :scope, "user"
+    = form.label :scope_user, "User"
+
+    = form.radio_button :scope, "comment"
+    = form.label :scope_comment, "Comment"
+
+  .search-result
