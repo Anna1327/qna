@@ -34,6 +34,7 @@ gem 'devise'
 gem 'doorkeeper'
 gem 'gon'
 gem 'jquery-rails'
+gem 'mysql2'
 gem 'oj'
 gem 'omniauth'
 gem 'omniauth-github'
@@ -45,9 +46,8 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'skim'
 gem 'slim-rails'
-gem 'whenever', require: false
-gem 'mysql2'
 gem 'thinking-sphinx'
+gem 'whenever', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -73,10 +73,10 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'database_cleaner'
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'webdrivers'
-  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

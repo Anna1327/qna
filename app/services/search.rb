@@ -1,8 +1,7 @@
 # frozen_string_literal: true
+
 class Search
   attr_reader :query, :scope, :page
-
-  ALL = 'all'
 
   def initialize(query, scope, page = 1)
     @query = ThinkingSphinx::Query.escape(query)
@@ -11,7 +10,7 @@ class Search
   end
 
   def call
-    if @scope == ALL
+    if @scope == Base::Enums::Search::ALL_SCOPE
       ThinkingSphinx.search @query, classes: [Question, Answer, Comment, User], page: @page
     else
       model_klass.search @query, page: @page
@@ -21,6 +20,8 @@ class Search
   private
 
   def model_klass
-    @scope.classify.constantize
+    return if @scope.nil?
+
+    @scope.classify.safe_constantize
   end
 end

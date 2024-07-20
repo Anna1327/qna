@@ -6,7 +6,6 @@ feature 'User can search answers', "
   In order to find answer
   As an authenticated user
   I'd like to be able to find answer" do
-
   given!(:question) { create :question }
   given!(:user) { create :user }
   given!(:answer) { create :answer, question: question, author: user }

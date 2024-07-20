@@ -6,7 +6,6 @@ feature 'User can search questions', "
   In order to find question
   As an authenticated user
   I'd like to be able to find question" do
-
   given!(:question) { create :question, title: 'question_for_search' }
 
   scenario 'user can find question', sphinx: true, js: true do

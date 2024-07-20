@@ -6,7 +6,6 @@ feature 'User can search comments', "
   In order to find comment
   As an authenticated user
   I'd like to be able to find comment" do
-
   given!(:user) { create :user }
   given!(:question) { create :question }
   given!(:comment) { create :comment, commentable: question, body: 'test_comment_text' }

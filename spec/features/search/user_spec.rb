@@ -6,7 +6,6 @@ feature 'User can search users', "
   In order to find user
   As an authenticated user
   I'd like to be able to find user" do
-
   given!(:user) { create :user }
 
   scenario 'user can find user', sphinx: true, js: true do

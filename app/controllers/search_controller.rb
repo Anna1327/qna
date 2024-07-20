@@ -3,8 +3,6 @@
 class SearchController < ApplicationController
   before_action :set_params
 
-  ALL_SCOPE = 'all'
-
   def search
     @result = Search.new(@query, @scope, @page).call unless @query.blank?
     render partial: 'search/result'
@@ -13,7 +11,7 @@ class SearchController < ApplicationController
   private
 
   def set_params
-    @scope = params[:scope] || ALL_SCOPE
+    @scope = params[:scope] || Base::Enums::Search::ALL_SCOPE
     @query = params[:query].to_s
     @page = params[:page]
   end

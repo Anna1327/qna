@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   resources :rewards, shallow: true, only: :index
   resources :comments, only: %i[create destroy]
   resources :subscribers, only: :destroy
-  
+
   get 'search', to: 'search#search'
 
   namespace :api do
