@@ -14,6 +14,7 @@ module Qna
     config.autoloader = :zeitwerk
 
     config.autoload_paths += [config.root.join('app')]
+    config.autoload_paths << Rails.root.join('lib')
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

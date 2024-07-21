@@ -8,14 +8,15 @@ require("turbolinks").start();
 require("@rails/activestorage").start();
 require("@rails/actioncable");
 require("channels");
-require("jquery");
-require("@nathanvda/cocoon");
 require("../answers");
 require("../questions");
 require("../gists_links");
 require("../rewards");
 require("../votes");
 require("../comments");
+require("../search/result");
+require("jquery");
+require("@nathanvda/cocoon");
 
 // window.jQuery = $;
 // window.$ = $;

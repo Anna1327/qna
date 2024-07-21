@@ -1,0 +1,16 @@
+- if resource.commentable.is_a?(Answer)
+  p
+    | Comment for answer in question:
+    = link_to resource.commentable.question.title, question_path(resource.commentable.question), target: :_blank
+    br
+    | "
+    = resource.body
+
+- if resource.commentable.is_a?(Question)
+  p
+    | Comment for question: 
+    = link_to resource.commentable.title, question_path(resource.commentable), target: :_blank
+    br
+    | "
+    = resource.body
+    | "
