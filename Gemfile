@@ -34,6 +34,7 @@ gem 'devise'
 gem 'doorkeeper'
 gem 'gon'
 gem 'jquery-rails'
+gem 'mini_racer', '~> 0.3.1'
 gem 'mysql2'
 gem 'oj'
 gem 'omniauth'
@@ -62,6 +63,11 @@ group :development do
   gem 'listen', '~> 3.2'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-passenger', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
