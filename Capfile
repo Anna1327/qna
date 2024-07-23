@@ -3,6 +3,7 @@ require "capistrano/setup"
 
 # Include default deployment tasks
 require "capistrano/deploy"
+require 'capistrano/nvm'
 require "capistrano/rvm"
 require "capistrano/bundler"
 require "capistrano/rails"
@@ -18,6 +19,10 @@ require "capistrano/passenger"
 # or
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
+
+set :nvm_type, :user # or :system, depends on your nvm setup
+set :nvm_node, 'v18.20.4'
+set :nvm_map_bins, %w[node npm yarn]
 
 # Include tasks from other gems included in your Gemfile
 #
