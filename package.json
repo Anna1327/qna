@@ -23,5 +23,8 @@
     "dotenv-webpack": "^8.0.1",
     "handlebars-loader": "^1.7.3",
     "webpack-dev-server": "^5.0.4"
+  },
+  "engine": {
+    "node": ">=18"
   }
 }
