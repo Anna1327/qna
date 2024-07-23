@@ -1,3 +1,5 @@
+before 'deploy:starting', 'check_node_version'
+
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.19.1"
 
@@ -20,4 +22,10 @@ desc "tail the application logfile"
 task :log do
   log = "#{application_dir}/current/log/#{node_env}.log"
   run "tail -f #{log}"
+end
+
+task :check_node_version do
+  on roles(:all) do
+    execute :node, '-v'
+  end
 end
