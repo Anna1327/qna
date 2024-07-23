@@ -8,8 +8,6 @@ require "capistrano/bundler"
 require "capistrano/rails"
 require "capistrano/passenger"
 
-load "config/deploy"
-
 # Load the SCM plugin appropriate to your project:
 #
 # require "capistrano/scm/hg"

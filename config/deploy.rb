@@ -1,6 +1,5 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.19.1"
-nvm use 18
 
 set :application, "qna"
 set :repo_url, "git@github.com:Anna1327/qna.git"
