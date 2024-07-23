@@ -60,6 +60,12 @@ module.exports = function (api) {
         },
       ],
       [
+        "@babel/plugin-transform-private-property-in-object",
+        {
+          loose: true,
+        },
+      ],
+      [
         "@babel/plugin-transform-runtime",
         {
           helpers: false,
