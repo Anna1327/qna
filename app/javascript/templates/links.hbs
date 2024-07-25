@@ -1,0 +1,12 @@
+{{#if links}}
+  <p>Links:</p>
+  {{#each links}}
+    <div id="link_id_{{id}}" class="d-flex content-align-between">
+      <p>
+        <a href="{{path}}" target="_blank" class="resource-link mx-1">
+          {{name}}
+        </a>
+      </p>
+    </div>
+  {{/each}}
+{{/if}}

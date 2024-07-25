@@ -1,0 +1,11 @@
+{{#if files}}
+  {{#each files}}
+    <div id="file_id_#{{id}}" class="d-flex content-align-between">
+      <p>
+        <a class="mx-1" href="{{path}}">
+          {{name}}
+        </a>
+      </p>
+    </div>
+  {{/each}}
+{{/if}}

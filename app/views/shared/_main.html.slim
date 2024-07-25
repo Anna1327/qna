@@ -5,6 +5,3 @@ div
     p= button_to t('main.sign_out'), destroy_user_session_path, method: :delete
   -else
     p= link_to t('main.sign_in'), new_user_session_path
-div
-  .search 
-    = render partial: 'search/search'

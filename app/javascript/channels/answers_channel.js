@@ -18,8 +18,11 @@ consumer.subscriptions.create("AnswersChannel", {
     if (!location.pathname.endsWith(data.answer.question_id)) {
       return;
     }
-    data.disabled_vote = data.answer.author_id === gon.current_user_id;
     const answer = require("templates/answer.hbs")(data);
+
     document.querySelector(`.answers`).insertAdjacentHTML("beforeend", answer);
+
+    const votesEvent = new Event("votesEvent");
+    document.dispatchEvent(votesEvent);
   },
 });

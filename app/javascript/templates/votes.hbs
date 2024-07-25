@@ -1,0 +1,31 @@
+<div class='votes center' data-resource-id={{votable.id}} data-resource-name={{votable_class}}>
+    <p class='mb-0'>
+        <a data-type="json"
+           data-answer-id="{{votable.id}}"
+           class="vote-up mx-1 {{#unless (can_vote? votable.author_id) }}disabled{{/unless}}"
+           data-remote="true"
+           rel="nofollow"
+           data-method="post"
+           href="/answers/{{votable.id}}/like">
+            <svg class="bi bi-caret-up" fill="currentColor" height="24" viewBox="0 0 16 16" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z"></path>
+            </svg>
+        </a>
+    </p>
+    <p class='vote-count mb-0'>
+        {{vote_count}}
+    </p>
+    <p class='mb-0'>
+        <a data-type="json"
+           data-answer-id="{{votable.id}}"
+           class="vote-down mx-1 {{#unless (can_vote? votable.author_id) }}disabled{{/unless}}"
+           data-remote="true"
+           rel="nofollow"
+           data-method="post"
+           href="/answers/{{votable.id}}/dislike">
+            <svg class="bi bi-caret-down" fill="currentColor" height="24" viewBox="0 0 16 16" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"></path>
+            </svg>
+        </a>
+    </p>
+</div>

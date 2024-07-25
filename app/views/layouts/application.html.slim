@@ -14,6 +14,12 @@ html
 
   body
     = render 'shared/main'
-    p.notice= notice
-    p.alert= alert
-    = yield
+    
+    div class='container-xxl my-md-4 bd-layout'
+      = render 'shared/flash'
+      = render 'search/search'
+      div class='row main-content'
+        aside class='col-1 border-end'
+          = render 'shared/side_bar'
+        main class="col"
+          = yield
