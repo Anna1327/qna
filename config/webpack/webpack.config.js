@@ -5,7 +5,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: "/.hbs$",
+        test: /\.hbs$/,
         use: {
           loader: "handlebars-loader",
           options: {
