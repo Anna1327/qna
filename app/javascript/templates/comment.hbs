@@ -6,7 +6,7 @@
     by:
     {{author.email}}
   </div>
-  {{#if (author_of? comment.author_id)}}
+  {{#if (author.author_of? comment.author_id)}}
     <p>
       <a
         href="/comments/{{comment.id}}"
