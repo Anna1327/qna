@@ -1,3 +1,5 @@
-const { environment } = require('@rails/webpacker')
+const { environment } = require("@rails/webpacker");
+const handlebars = require("./loaders/handlebars");
 
-module.exports = environment
+environment.loaders.prepend("handlebars", handlebars);
+module.exports = environment;
