@@ -15,6 +15,7 @@ require("../rewards");
 require("../votes");
 require("../comments");
 require("../search/result");
+require("../templates/answer.hbs");
 require("jquery");
 require("@nathanvda/cocoon");
 
