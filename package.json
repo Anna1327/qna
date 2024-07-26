@@ -26,5 +26,8 @@
   },
   "engine": {
     "node": ">=18"
+  },
+  "scripts": {
+    "start": "react-scripts start --openssl-legacy-provider"
   }
 }
