@@ -9,6 +9,7 @@
     "@rails/webpacker": "^5.4.4",
     "actioncable": "^5.2.8-1",
     "bootstrap": "^5.3.3",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "gist-client": "^1.1.1",
     "handlebars": "^4.7.8",
@@ -19,7 +20,9 @@
   },
   "version": "0.1.0",
   "scripts": {
-    "start": "qna@0.1.0 start --openssl-legacy-provider"
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider && next qna@0.1.0 start",
+    "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider && next dev",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider && next build && next export"
   },
   "devDependencies": {
     "bootstrap": "^5.3.3",
