@@ -16,7 +16,8 @@
     "handlebars-helper": "^0.0.12",
     "handlebars-loader": "^1.7.3",
     "jquery": "^3.7.1",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "sass": "1.38.0"
   },
   "version": "0.1.0",
   "scripts": {
@@ -28,9 +29,12 @@
     "bootstrap": "^5.3.3",
     "dotenv-webpack": "^8.0.1",
     "handlebars-loader": "^1.7.3",
-    "webpack-dev-server": "^5.0.4"
+    "webpack-dev-server": "^3"
+  },
+  "resolutions": {
+    "sass": "1.38.0"
   },
   "engine": {
-    "node": ">=18"
+    "node": ">=12"
   }
 }
