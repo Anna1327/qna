@@ -48,7 +48,7 @@ gem 'sinatra', require: false
 gem 'skim'
 gem 'slim-rails'
 gem 'thinking-sphinx'
-gem 'redis-rails'
+gem 'redis-rails', '~> 5.0'
 gem 'whenever', require: false
 
 group :development, :test do
