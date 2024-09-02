@@ -8,6 +8,8 @@ require "capistrano/bundler"
 require "capistrano/rails"
 require "capistrano/passenger"
 require "capistrano/sidekiq"
+require "thinking_sphinx/capistrano"
+require "whenever/capistrano"
 
 # Load the SCM plugin appropriate to your project:
 #
@@ -19,6 +21,8 @@ require "capistrano/sidekiq"
 # or
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
+install_plugin Capistrano::Sidekiq
+install_plugin Capistrano::Sidekiq::Systemd
 
 set :nvm_type, :user # or :system, depends on your nvm setup
 set :nvm_node, 'v18.20.4'
