@@ -48,6 +48,7 @@ gem 'sinatra', require: false
 gem 'skim'
 gem 'slim-rails'
 gem 'thinking-sphinx'
+gem 'unicorn'
 gem 'redis-rails'
 gem 'whenever', require: false
 
@@ -70,6 +71,7 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-unicorn', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
