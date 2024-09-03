@@ -1,10 +1,10 @@
 development:
-  adapter: redis_5
+  adapter: redis
 
 test:
   adapter: async
 
 production:
-  adapter: redis_5
+  adapter: redis
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
   channel_prefix: qna_production
