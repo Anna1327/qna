@@ -1,16 +1,17 @@
-= form_with model: resource.comments,
-        url: comments_path,
-        local: false,
-        data: {type: 'json'},
-        html: { class: 'create-comment', id: "#{resource.class.name.downcase}-#{resource.id}" } do |f|
-  .errors
-    = render 'shared/errors', resource: resource
-  div
-    = f.label :body, 'Comment body'
-    = f.text_area :body
+- cache ['comment_form', resource] do
+  = form_with model: resource.comments,
+          url: comments_path,
+          local: false,
+          data: {type: 'json'},
+          html: { class: 'create-comment', id: "#{resource.class.name.downcase}-#{resource.id}" } do |f|
+    .errors
+      = render 'shared/errors', resource: resource
+    div
+      = f.label :body, 'Comment body'
+      = f.text_area :body
 
-  = f.hidden_field :commentable_type, value: resource.class.name
-  = f.hidden_field :commentable_id, value: resource.id
-  = f.hidden_field :author_id, value: current_user&.id
+    = f.hidden_field :commentable_type, value: resource.class.name
+    = f.hidden_field :commentable_id, value: resource.id
+    = f.hidden_field :author_id, value: current_user&.id
 
-  p= f.submit t('comments.new.create')
+    p= f.submit t('comments.new.create')

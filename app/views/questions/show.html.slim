@@ -1,57 +1,57 @@
-h3= t('.header')
+- cache resource: @question do
+  h3= t('.header')
+  .question
+    div class='votes' data-question-id=@question.id
+      =render 'votes/vote', resource: @question
+    div class='question_title'
+      p#question_title= @question.title
+    div class='question_body'
+      p#question_body= @question.body
+    div class='question_files'
+      p#question_files
+      =render 'shared/files', resource: @question
+    div class='question_links'
+      p#question_links
+        =render 'shared/links', resource: @question
+    hr
+    div class='question_comments'
+      p#question_comments
+        =render 'shared/comments', resource: @question
 
-.question
-  div class='votes' data-question-id=@question.id
-    =render 'votes/vote', resource: @question
-  div class='question_title'
-    p#question_title= @question.title
-  div class='question_body'
-    p#question_body= @question.body
-  div class='question_files'
-    p#question_files
-    =render 'shared/files', resource: @question
-  div class='question_links'
-    p#question_links
-      =render 'shared/links', resource: @question
-  hr
-  div class='question_comments'
-    p#question_comments
-      =render 'shared/comments', resource: @question
+    - if user_signed_in? && current_user.author_of?(question)
+      p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'
+      p= link_to t('.edit'), '#', data: { question_id: @question.id }, class: 'edit-question-link'
+      .subscribe
+        =render 'shared/subscriber'
 
-  - if user_signed_in? && current_user.author_of?(question)
-    p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'
-    p= link_to t('.edit'), '#', data: { question_id: @question.id }, class: 'edit-question-link'
-    .subscribe
-      =render 'shared/subscriber'
+    .question_errors
+      = render 'shared/errors', resource: @question
 
-  .question_errors
-    = render 'shared/errors', resource: @question
+    = render 'form', form_local: false, form_class: 'hidden', submit_text: t('questions.edit.update')
 
-  = render 'form', form_local: false, form_class: 'hidden', submit_text: t('questions.edit.update')
+  h4= t('.answers')
 
-h4= t('.answers')
+  .answers
+    =render question.best_answer, answer_class: 'best_answer' unless question.best_answer_id.nil?
+    =render question.other_answers, answer_class: nil
 
-.answers
-  =render question.best_answer, answer_class: 'best_answer' unless question.best_answer_id.nil?
-  =render question.other_answers, answer_class: nil
+    - if user_signed_in?
+      h4= t('.add_answer')
+      .answer_errors
+        = render 'shared/errors', resource: @answer
 
-  - if user_signed_in?
-    h4= t('.add_answer')
-    .answer_errors
-      = render 'shared/errors', resource: @answer
+      = form_with model: [@question, @answer], local: false, class: 'new-answer' do |f|
+        p
+          = f.label :body
+          = f.text_area :body
+        p
+          = f.label :files
+          = f.file_field :files, multiple: true, direct_upload: true
 
-    = form_with model: [@question, @answer], local: false, class: 'new-answer' do |f|
-      p
-        = f.label :body
-        = f.text_area :body
-      p
-        = f.label :files
-        = f.file_field :files, multiple: true, direct_upload: true
+        p = t('links.new.header')
+        #answer_links
+          = f.fields_for :links do |link|
+          .add_link
+            = link_to_add_association t('links.new.add_link'), f, :links, partial: 'links/link_fields'
 
-      p = t('links.new.header')
-      #answer_links
-        = f.fields_for :links do |link|
-        .add_link
-          = link_to_add_association t('links.new.add_link'), f, :links, partial: 'links/link_fields'
-
-      p= f.submit t('answers.create.submit')
+        p= f.submit t('answers.create.submit')

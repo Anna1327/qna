@@ -1,11 +1,13 @@
+
 h3= t('.header')
 
 p= link_to t('.ask_question'), new_question_path
 
-table
-  thead
-    tr
-      th= t('.title')
-      th= t('.body')
-  tbody
-    =render @questions
+- cache collection_cache_key_for :question do
+  table
+    thead
+      tr
+        th= t('.title')
+        th= t('.body')
+    tbody
+      =render @questions
